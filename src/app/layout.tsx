@@ -26,7 +26,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           disableTransitionOnChange
         >
           <Header />
-          <main className="container flex pt-10 min-h-screen">{children}</main>
+          <main className="container flex pt-10 w-screen">{children}</main>
         </ThemeProvider>
       </body>
     </html>
