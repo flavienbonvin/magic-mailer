@@ -1,9 +1,16 @@
 import { PAGES } from "@/constants";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import Muted from "../typography/muted";
-import { Button } from "../ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../ui/card";
+import Muted from "../../typography/muted";
+import { Button } from "../../ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "../../ui/card";
 
 interface ShowCardProps {
   showTitle: string;

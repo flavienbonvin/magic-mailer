@@ -1,14 +1,10 @@
-import ShowCard from "@/components/layout/show-card";
-import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
+import CreateShowModal from "@/components/features/home/create-show-modal";
+import ShowCard from "@/components/features/home/show-card";
 
 export default function Home() {
   return (
     <div className="flex flex-col gap-10 w-full">
-      <Button className="w-fit place-self-end">
-        <Plus size={16} className="mr-2" />
-        Créer une repésentation
-      </Button>
+      <CreateShowModal />
       <div className="grid grid-cols-3 h-fit gap-4">
         <ShowCard showTitle="Opéra de Lausanne 1" showDate={new Date()} finished />
         <ShowCard showTitle="Opéra de Lausanne 2" showDate={new Date()} />

@@ -1,5 +1,5 @@
-import StepHeader from "@/components/layout/step-header";
-import StepTitle from "@/components/layout/step-title";
+import StepHeader from "@/components/features/steps/step-header";
+import StepTitle from "@/components/features/steps/step-title";
 import { Button } from "@/components/ui/button";
 import {
   Table,

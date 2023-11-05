@@ -1,4 +1,4 @@
-import StepHeader from "@/components/layout/step-header";
+import StepHeader from "@/components/features/steps/step-header";
 
 export default function Page() {
   return (

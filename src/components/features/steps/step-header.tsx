@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import { Binary } from "lucide-react";
-import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
+import { Alert, AlertDescription, AlertTitle } from "../../ui/alert";
 
 interface StepHeaderProps {
   stepDescription: string;
