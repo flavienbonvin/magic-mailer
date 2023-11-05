@@ -19,7 +19,7 @@ interface ShowCardProps {
 
 const ShowStatus = ({ finished }: { finished: boolean }) => {
   return (
-    <div className="flex gap-1 place-items-center">
+    <div className="flex place-items-center gap-1">
       <p className={cn("h-2 w-2 rounded-full", finished ? "bg-lime-500" : "bg-amber-500")} />
       <Muted>{finished ? "Terminé" : "En cours"}</Muted>
     </div>

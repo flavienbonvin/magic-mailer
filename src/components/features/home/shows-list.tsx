@@ -47,15 +47,15 @@ const ShowList = () => {
 
   return (
     <div className="flex flex-col gap-10">
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 lg:gap-4 gap-2">
+      <div className="grid gap-2 md:grid-cols-2 lg:grid-cols-3 lg:gap-4">
         {upcomingDates.map((show) => (
           <ShowCard show={show} />
         ))}
       </div>
       <section>
-        <h2 className="text-2xl font-semibold tracking-tight first:mt-0 mb-4">Shows terminés</h2>
+        <h2 className="mb-4 text-2xl font-semibold tracking-tight first:mt-0">Shows terminés</h2>
         {finishedDates.length === 0 && <Muted>Aucun show terminé pour le moment</Muted>}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 lg:gap-4 gap-2">
+        <div className="grid gap-2 md:grid-cols-2 lg:grid-cols-3 lg:gap-4">
           {finishedDates.map((show) => (
             <ShowCard show={show} />
           ))}

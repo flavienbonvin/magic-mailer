@@ -3,7 +3,7 @@ import ShowList from "@/components/features/home/shows-list";
 
 export default function Home() {
   return (
-    <div className="flex flex-col gap-10 w-full">
+    <div className="flex w-full flex-col gap-10">
       <CreateShowModal />
       <ShowList />
     </div>

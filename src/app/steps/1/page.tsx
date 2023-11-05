@@ -14,14 +14,14 @@ import { Upload } from "lucide-react";
 
 export default function Page() {
   return (
-    <div className="flex flex-col gap-4 w-full">
+    <div className="flex w-full flex-col gap-4">
       <StepTitle stepNumber={1} />
       <StepHeader
         stepDescription="Première étape, veuillez entrez les personnes à qui envoyer le mail."
         longDescription="Il est possible d'ajouter plusieurs personnes en même temps avec un fichier CSV ou de rentrer des personnes manuellement."
         className="mb-6"
       />
-      <div className="flex flex-col sm:flex-row gap-4 mb-2">
+      <div className="mb-2 flex flex-col gap-4 sm:flex-row">
         <Button size="sm">
           <Upload size={16} className="mr-2" />
           Upload CSV

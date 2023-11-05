@@ -7,7 +7,7 @@ import { Button } from "../ui/button";
 
 const Header = () => {
   return (
-    <header className="w-full h-14 border-b flex place-items-center gap-2 px-4">
+    <header className="flex h-14 w-full place-items-center gap-2 border-b px-4">
       <Button asChild variant="ghost" size="icon">
         <Link href={PAGES.HOME}>
           <Home size={20} />

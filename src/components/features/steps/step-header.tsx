@@ -10,7 +10,7 @@ interface StepHeaderProps {
 
 const StepHeader = ({ stepDescription, longDescription, className }: StepHeaderProps) => {
   return (
-    <Alert className={cn("w-full h-fit", className)}>
+    <Alert className={cn("h-fit w-full", className)}>
       <Binary className="h-4 w-4" />
       <AlertTitle>Détails</AlertTitle>
       <AlertDescription>
