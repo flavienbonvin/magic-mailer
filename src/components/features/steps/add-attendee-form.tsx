@@ -1,7 +1,6 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import DatePicker from "@/components/ui/date-picker";
 import {
   Form,
   FormControl,
@@ -16,18 +15,20 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 const formSchema = z.object({
-  name: z.string(),
-  date: z.date(),
+  firstName: z.string(),
+  lastName: z.string(),
+  email: z.string().email({ message: "L'adresse email n'est pas valide." }),
 });
 
 type FormSchema = z.infer<typeof formSchema>;
 
-const CreateShowForm = () => {
+const AddAttendeeForm = () => {
   const form = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: "",
-      date: new Date(),
+      firstName: "",
+      lastName: "",
+      email: "",
     },
   });
 
@@ -40,10 +41,10 @@ const CreateShowForm = () => {
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <FormField
           control={form.control}
-          name="name"
+          name="firstName"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Nom de la représentation ou du lieu</FormLabel>
+              <FormLabel>Prénom</FormLabel>
               <FormControl>
                 <Input {...field} />
               </FormControl>
@@ -53,15 +54,25 @@ const CreateShowForm = () => {
         />
         <FormField
           control={form.control}
-          name="date"
-          render={() => (
+          name="lastName"
+          render={({ field }) => (
             <FormItem>
-              <FormLabel className="block">Date de la représentation</FormLabel>
+              <FormLabel>Nom de famille</FormLabel>
               <FormControl>
-                <DatePicker
-                  date={form.getValues("date")}
-                  setDate={(value) => form.setValue("date", value, { shouldValidate: true })}
-                />
+                <Input {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="email"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Addresse email</FormLabel>
+              <FormControl>
+                <Input {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -73,4 +84,4 @@ const CreateShowForm = () => {
   );
 };
 
-export default CreateShowForm;
+export default AddAttendeeForm;

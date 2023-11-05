@@ -31,9 +31,9 @@ const CreateShowModal = () => {
             <Muted className="mb-4">
               Informez les données relatives à la représentation et à sa date
             </Muted>
-            <CreateShowForm />
           </DialogDescription>
         </DialogHeader>
+        <CreateShowForm />
       </DialogContent>
     </Dialog>
   );
