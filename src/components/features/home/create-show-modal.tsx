@@ -19,14 +19,16 @@ const CreateShowModal = () => {
       <DialogTrigger asChild>
         <Button className="place-self-end">
           <Plus size={16} className="mr-2" />
-          Créer une repésentation
+          Créer une représentation
         </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Création d'un nouveau spectacle</DialogTitle>
+          <DialogTitle>Création d'une nouvelle repésentation</DialogTitle>
           <DialogDescription>
-            <Muted className="mb-4">Informez les données relatives au spectacle et à sa date</Muted>
+            <Muted className="mb-4">
+              Informez les données relatives à la représentation et à sa date
+            </Muted>
             <CreateShowForm />
           </DialogDescription>
         </DialogHeader>

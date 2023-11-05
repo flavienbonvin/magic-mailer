@@ -1,4 +1,5 @@
 import { PAGES } from "@/constants";
+import Show from "@/dto/models/show";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import Muted from "../../typography/muted";
@@ -13,9 +14,7 @@ import {
 } from "../../ui/card";
 
 interface ShowCardProps {
-  showTitle: string;
-  showDate: Date;
-  finished?: boolean;
+  show: Show;
 }
 
 const ShowStatus = ({ finished }: { finished: boolean }) => {
@@ -27,19 +26,19 @@ const ShowStatus = ({ finished }: { finished: boolean }) => {
   );
 };
 
-const ShowCard = ({ showTitle, showDate, finished = false }: ShowCardProps) => {
+const ShowCard = ({ show }: ShowCardProps) => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>{showTitle}</CardTitle>
-        <CardDescription>{showDate.toLocaleDateString()}</CardDescription>
+        <CardTitle>{show.name}</CardTitle>
+        <CardDescription>{show.date.toLocaleDateString()}</CardDescription>
       </CardHeader>
       <CardContent>
-        <ShowStatus finished={finished} />
+        <ShowStatus finished={show.finished} />
       </CardContent>
       <CardFooter>
         <Button size="sm" variant="outline" asChild>
-          {finished ? (
+          {show.finished ? (
             <Link href={PAGES.SUMMARY}>Résumé</Link>
           ) : (
             <Link href={PAGES.STEP1}>Commencer</Link>

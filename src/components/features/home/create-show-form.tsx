@@ -44,14 +44,14 @@ const CreateShowForm = () => {
           render={({ field }) => (
             <>
               <FormItem>
-                <FormLabel>Nom du spectacle</FormLabel>
+                <FormLabel>Nom de la représentation ou du lieu</FormLabel>
                 <FormControl>
                   <Input {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
               <FormItem>
-                <FormLabel className="block">Date du spectacle</FormLabel>
+                <FormLabel className="block">Date de la représentation</FormLabel>
                 <FormControl>
                   <DatePicker
                     date={form.getValues("date")}
