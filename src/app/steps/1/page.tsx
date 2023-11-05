@@ -21,7 +21,7 @@ export default function Page() {
         longDescription="Il est possible d'ajouter plusieurs personnes en même temps avec un fichier CSV ou de rentrer des personnes manuellement."
         className="mb-6"
       />
-      <div className="flex gap-4 mb-2">
+      <div className="flex flex-col sm:flex-row gap-4 mb-2">
         <Button size="sm">
           <Upload size={16} className="mr-2" />
           Upload CSV
