@@ -1,5 +1,4 @@
 import { ThemeProvider } from "@/components/containers/theme-provider";
-import Header from "@/components/layout/header";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
@@ -25,8 +24,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           enableSystem
           disableTransitionOnChange
         >
-          <Header />
-          <main className="container flex w-screen pt-10">{children}</main>
+          {children}
         </ThemeProvider>
       </body>
     </html>

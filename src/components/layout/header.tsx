@@ -9,7 +9,7 @@ const Header = () => {
   return (
     <header className="flex h-14 w-full place-items-center gap-2 border-b px-4">
       <Button asChild variant="ghost" size="icon">
-        <Link href={PAGES.HOME}>
+        <Link href={PAGES.DASHBOARD}>
           <Home size={20} />
         </Link>
       </Button>
