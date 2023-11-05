@@ -6,31 +6,37 @@ import ShowCard from "./show-card";
 const ShowList = () => {
   const shows: Show[] = [
     {
+      id: crypto.randomUUID(),
       name: "Casino Lausanne 1 ",
       date: subDays(new Date(), 3),
       finished: true,
     },
     {
+      id: crypto.randomUUID(),
       name: "Casino Lausanne 2",
       date: subDays(new Date(), 2),
       finished: true,
     },
     {
+      id: crypto.randomUUID(),
       name: "Opera de lausanne 1",
       date: subDays(new Date(), 1),
       finished: true,
     },
     {
+      id: crypto.randomUUID(),
       name: "Opera de lausanne 2",
       date: addDays(new Date(), 1),
       finished: false,
     },
     {
+      id: crypto.randomUUID(),
       name: "Opera de lausanne 3",
       date: addDays(new Date(), 2),
       finished: false,
     },
     {
+      id: crypto.randomUUID(),
       name: "Opera de lausanne 4",
       date: addDays(new Date(), 3),
       finished: false,
@@ -49,7 +55,7 @@ const ShowList = () => {
     <div className="flex flex-col gap-10">
       <div className="grid gap-2 md:grid-cols-2 lg:grid-cols-3 lg:gap-4">
         {upcomingDates.map((show) => (
-          <ShowCard show={show} />
+          <ShowCard show={show} key={show.id} />
         ))}
       </div>
       <section>
@@ -57,7 +63,7 @@ const ShowList = () => {
         {finishedDates.length === 0 && <Muted>Aucun show terminé pour le moment</Muted>}
         <div className="grid gap-2 md:grid-cols-2 lg:grid-cols-3 lg:gap-4">
           {finishedDates.map((show) => (
-            <ShowCard show={show} />
+            <ShowCard show={show} key={show.id} />
           ))}
         </div>
       </section>

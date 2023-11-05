@@ -24,7 +24,9 @@ const CreateShowModal = () => {
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle className="text-left">Création d'une nouvelle repésentation</DialogTitle>
+          <DialogTitle className="text-left">
+            Création d&apos;une nouvelle repésentation
+          </DialogTitle>
           <DialogDescription className="text-left">
             <Muted className="mb-4">
               Informez les données relatives à la représentation et à sa date
