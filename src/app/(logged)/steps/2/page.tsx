@@ -1,6 +1,7 @@
 import ConfirmationStepPicture from "@/components/features/steps/confirmation-step-picture";
 import StepHeader from "@/components/features/steps/step-header";
 import StepTitle from "@/components/features/steps/step-title";
+import UploadPicutre from "@/components/features/steps/upload-picture";
 
 export default function Page() {
   return (
@@ -9,6 +10,7 @@ export default function Page() {
         <ConfirmationStepPicture />
       </StepTitle>
       <StepHeader stepDescription="Deuxième étape, envoi de l'image contenant les prediction" />
+      <UploadPicutre />
     </div>
   );
 }
