@@ -16,6 +16,18 @@ const AttendeeManagement = () => {
     });
   };
 
+  const handleAddOneAttendee = (attendee: CSVAttendee) => {
+    setAttendees([...attendees, attendee]);
+  };
+
+  const handleDeleteAttendee = (attendeeID: string) => {
+    setAttendees((temp) => temp.filter((attendee) => attendee.id !== attendeeID));
+  };
+
+  const handleEditAttendee = (attendeeID: string) => {
+    console.log(attendeeID);
+  };
+
   return (
     <>
       <div className="mb-2 flex flex-col gap-4 sm:flex-row sm:items-end">
@@ -25,7 +37,7 @@ const AttendeeManagement = () => {
             Upload CSV
           </>
         </FileUploadButton>
-        <AddAttendeeModal />
+        <AddAttendeeModal onAddAttendee={handleAddOneAttendee} />
       </div>
       {attendees.length === 0 && (
         <div className="flex h-32 flex-col items-center justify-center">
@@ -34,7 +46,13 @@ const AttendeeManagement = () => {
           </p>
         </div>
       )}
-      {attendees.length > 0 && <AttendeeTable attendees={attendees} />}
+      {attendees.length > 0 && (
+        <AttendeeTable
+          attendees={attendees}
+          onDeleteAttendee={handleDeleteAttendee}
+          onEditAttendee={handleEditAttendee}
+        />
+      )}
     </>
   );
 };

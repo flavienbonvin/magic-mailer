@@ -10,11 +10,23 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { CSVAttendee } from "@/dto/models/csvAttendee";
+import { useState } from "react";
 import AddAttendeeForm from "./add-attendee-form";
 
-const AddAttendeeModal = () => {
+interface AddAttendeeModalProps {
+  onAddAttendee: (data: CSVAttendee) => void;
+}
+
+const AddAttendeeModal = ({ onAddAttendee }: AddAttendeeModalProps) => {
+  const [open, setOpen] = useState(false);
+  const handleAddOneAttendee = (attendee: CSVAttendee) => {
+    onAddAttendee(attendee);
+    setOpen(false);
+  };
+
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button size="sm" variant="outline">
           Ajouter manuellement
@@ -23,11 +35,11 @@ const AddAttendeeModal = () => {
       <DialogContent>
         <DialogHeader>
           <DialogTitle className="text-left">Création d&apos;un nouveau participant</DialogTitle>
-          <DialogDescription className="text-left">
+          <DialogDescription className="text-left" asChild>
             <Muted className="mb-4">Ajoutez un participant à la main</Muted>
           </DialogDescription>
         </DialogHeader>
-        <AddAttendeeForm />
+        <AddAttendeeForm onAddAttendee={handleAddOneAttendee} />
       </DialogContent>
     </Dialog>
   );

@@ -14,9 +14,11 @@ import ConfirmationRemoveAttendee from "./confirmation-remove-attendee";
 
 interface AttendeeTableProps {
   attendees: CSVAttendee[];
+  onEditAttendee: (attendeeID: string) => void;
+  onDeleteAttendee: (attendeeID: string) => void;
 }
 
-const AttendeeTable = ({ attendees }: AttendeeTableProps) => {
+const AttendeeTable = ({ attendees, onEditAttendee, onDeleteAttendee }: AttendeeTableProps) => {
   return (
     <Table className="border">
       <TableCaption>{attendees.length} personnes présentes à la représentation</TableCaption>
@@ -30,16 +32,21 @@ const AttendeeTable = ({ attendees }: AttendeeTableProps) => {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {attendees.map((attendee) => (
-          <TableRow key={attendee.id}>
-            <TableCell>{attendee.firstName}</TableCell>
-            <TableCell>{attendee.lastName}</TableCell>
-            <TableCell>{attendee.email}</TableCell>
+        {attendees.map(({ id, firstName, lastName, email }) => (
+          <TableRow key={id}>
+            <TableCell>{firstName}</TableCell>
+            <TableCell>{lastName}</TableCell>
+            <TableCell>{email}</TableCell>
             <TableCell className="text-right">
-              <Button size="icon" variant="ghost" className="mr-2">
+              <Button
+                size="icon"
+                variant="ghost"
+                className="mr-2"
+                onClick={() => onEditAttendee(id)}
+              >
                 <Pen size={16} />
               </Button>
-              <ConfirmationRemoveAttendee />
+              <ConfirmationRemoveAttendee onConfirm={() => onDeleteAttendee(id)} />
             </TableCell>
           </TableRow>
         ))}
