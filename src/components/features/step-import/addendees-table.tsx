@@ -8,23 +8,18 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import Attendee from "@/dto/models/attendee";
+import { CSVAttendee } from "@/dto/models/csvAttendee";
 import { Pen } from "lucide-react";
 import ConfirmationRemoveAttendee from "./confirmation-remove-attendee";
 
-const AttendeeTable = () => {
-  const attendees: Attendee[] = [
-    {
-      id: crypto.randomUUID(),
-      firstName: "Flavien",
-      lastName: "Bonvin",
-      email: "flavien.bonvin@pm.me",
-    },
-  ];
+interface AttendeeTableProps {
+  attendees: CSVAttendee[];
+}
 
+const AttendeeTable = ({ attendees }: AttendeeTableProps) => {
   return (
     <Table className="border">
-      <TableCaption>Personnes présentes à la représentation</TableCaption>
+      <TableCaption>{attendees.length} personnes présentes à la représentation</TableCaption>
 
       <TableHeader>
         <TableRow>
