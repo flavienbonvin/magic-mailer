@@ -1,5 +1,6 @@
 "use client";
 
+import ThemeSwitcher from "@/components/atoms/theme-switcher";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -69,7 +70,10 @@ const LoginForm = () => {
             </FormItem>
           )}
         />
-        <Button type="submit">Sauvegarder</Button>
+        <div className="flex justify-between">
+          <Button type="submit">Sauvegarder</Button>
+          <ThemeSwitcher />
+        </div>
       </form>
     </Form>
   );

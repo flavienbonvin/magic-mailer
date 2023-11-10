@@ -2,11 +2,18 @@
 
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
 
-//TODO fix next issue when the theme is dark and user reload the page
 const ThemeSwitcher = () => {
+  const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null;
 
   const handleClick = () => {
     setTheme(theme === "light" ? "dark" : "light");
@@ -15,7 +22,7 @@ const ThemeSwitcher = () => {
   const child = theme === "dark" ? <Sun /> : <Moon />;
 
   return (
-    <Button onClick={handleClick} size="icon" variant="ghost">
+    <Button onClick={handleClick} size="icon" variant="ghost" type="button">
       {child}
     </Button>
   );
