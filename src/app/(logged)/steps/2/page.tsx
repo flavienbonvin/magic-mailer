@@ -1,7 +1,7 @@
-import ConfirmationStepPicture from "@/components/features/steps/confirmation-step-picture";
-import StepHeader from "@/components/features/steps/step-header";
-import StepTitle from "@/components/features/steps/step-title";
-import UploadPicutre from "@/components/features/steps/upload-picture";
+import ConfirmationStepPicture from "@/components/features/step-image/confirmation-step-picture";
+import UploadPicutre from "@/components/features/step-image/upload-picture";
+import StepHeader from "@/components/features/step/step-header";
+import StepTitle from "@/components/features/step/step-title";
 
 export default function Page() {
   return (

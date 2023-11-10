@@ -1,9 +1,9 @@
-import AddAttendeeModal from "@/components/features/steps/add-attendee-modal";
-import AttendeeTable from "@/components/features/steps/addendees-table";
-import ConfirmationStepEmail from "@/components/features/steps/confirmation-step-email";
-import StepHeader from "@/components/features/steps/step-header";
-import StepTitle from "@/components/features/steps/step-title";
-import UploadCsv from "@/components/features/steps/upload-csv";
+import AddAttendeeModal from "@/components/features/step-import/add-attendee-modal";
+import AttendeeTable from "@/components/features/step-import/addendees-table";
+import ConfirmationStepEmail from "@/components/features/step-import/confirmation-step-email";
+import UploadCsv from "@/components/features/step-import/upload-csv";
+import StepHeader from "@/components/features/step/step-header";
+import StepTitle from "@/components/features/step/step-title";
 
 export default function Page() {
   return (
