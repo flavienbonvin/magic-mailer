@@ -2,43 +2,24 @@
 
 import { Button } from "@/components/ui/button";
 import FileUploadButton from "@/components/ui/file-upload";
-import { CSVAttendee } from "@/dto/models/csvAttendee";
-import { parseFileToAttendees } from "@/lib/csvParser";
+import useAttendeeManagement from "@/hooks/useAttendeeManagement";
 import { Upload } from "lucide-react";
-import { useState } from "react";
 import AddAttendeeModal from "./add-attendee-modal";
 import AttendeeTable from "./addendees-table";
 
 const AttendeeManagement = () => {
-  const [openModal, setOpenModal] = useState(false);
-  const [editedAttendee, setEditedAttendee] = useState<CSVAttendee | undefined>(undefined);
-  const [attendees, setAttendees] = useState<CSVAttendee[]>([]);
-
-  const handleNewFile = (file: File) => {
-    parseFileToAttendees(file, (data: CSVAttendee[]) => {
-      setAttendees((a) => [...a, ...data]);
-    });
-  };
-
-  const handleAddOneAttendee = (attendee: CSVAttendee) => {
-    const index = attendees.findIndex(({ id }) => id === attendee.id);
-    if (index !== -1) {
-      attendees[index] = attendee;
-      setAttendees([...attendees]);
-      setEditedAttendee(undefined);
-    } else {
-      setAttendees((a) => [...a, attendee]);
-    }
-  };
-
-  const handleDeleteAttendee = (attendeeID: string) => {
-    setAttendees((a) => a.filter(({ id }) => id !== attendeeID));
-  };
-
-  const handleEditAttendee = (attendeeID: string) => {
-    setEditedAttendee(attendees.find(({ id }) => id === attendeeID));
-    setOpenModal(true);
-  };
+  const {
+    openModal,
+    setOpenModal,
+    editedAttendee,
+    setEditedAttendee,
+    attendees,
+    setAttendees,
+    handleNewFile,
+    handleAddOneAttendee,
+    handleDeleteAttendee,
+    handleEditAttendee,
+  } = useAttendeeManagement();
 
   return (
     <>
