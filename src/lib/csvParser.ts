@@ -6,13 +6,24 @@ export const parseFileToAttendees = (file: File, callback: (data: CSVAttendee[])
     header: true,
     skipEmptyLines: true,
     complete: (results) => {
-      const attendees = new Set<CSVAttendee>();
+      // One temp UUID created for all attendees to have remove duplicates in the set
+      const tempUUID = crypto.randomUUID();
+      const attendees = new Set<string>();
+
       results.data.forEach((item) => {
-        const attendee = CSVAttendeeParser.parse({ id: crypto.randomUUID(), ...(item ?? {}) });
-        attendees.add(attendee);
+        const attendee = CSVAttendeeParser.parse({ id: tempUUID, ...(item ?? {}) });
+        attendees.add(JSON.stringify(attendee));
       });
 
-      callback(Array.from(attendees));
+      // Each attendee gets a new different UUID
+      const finalAttendees = Array.from(attendees).map((item) => {
+        return {
+          ...JSON.parse(item),
+          id: crypto.randomUUID(),
+        };
+      });
+
+      callback(finalAttendees);
     },
   });
 };

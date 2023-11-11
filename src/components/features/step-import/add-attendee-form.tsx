@@ -25,20 +25,21 @@ type FormSchema = z.infer<typeof formSchema>;
 
 interface AddAttendeeFormProps {
   onAddAttendee: (data: CSVAttendee) => void;
+  attendee?: CSVAttendee;
 }
 
-const AddAttendeeForm = ({ onAddAttendee }: AddAttendeeFormProps) => {
+const AddAttendeeForm = ({ onAddAttendee, attendee }: AddAttendeeFormProps) => {
   const form = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      firstName: "",
-      lastName: "",
-      email: "",
+      firstName: attendee?.firstName ?? "",
+      lastName: attendee?.lastName ?? "",
+      email: attendee?.email ?? "",
     },
   });
 
   const onSubmit = (data: FormSchema) => {
-    onAddAttendee({ id: crypto.randomUUID(), ...data });
+    onAddAttendee({ id: attendee?.id ?? crypto.randomUUID(), ...data });
   };
 
   return (

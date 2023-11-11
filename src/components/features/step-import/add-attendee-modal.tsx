@@ -11,15 +11,16 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { CSVAttendee } from "@/dto/models/csvAttendee";
-import { useState } from "react";
 import AddAttendeeForm from "./add-attendee-form";
 
 interface AddAttendeeModalProps {
   onAddAttendee: (data: CSVAttendee) => void;
+  attendee?: CSVAttendee;
+  open: boolean;
+  setOpen: (open: boolean) => void;
 }
 
-const AddAttendeeModal = ({ onAddAttendee }: AddAttendeeModalProps) => {
-  const [open, setOpen] = useState(false);
+const AddAttendeeModal = ({ onAddAttendee, open, setOpen, attendee }: AddAttendeeModalProps) => {
   const handleAddOneAttendee = (attendee: CSVAttendee) => {
     onAddAttendee(attendee);
     setOpen(false);
@@ -39,7 +40,7 @@ const AddAttendeeModal = ({ onAddAttendee }: AddAttendeeModalProps) => {
             <Muted className="mb-4">Ajoutez un participant à la main</Muted>
           </DialogDescription>
         </DialogHeader>
-        <AddAttendeeForm onAddAttendee={handleAddOneAttendee} />
+        <AddAttendeeForm onAddAttendee={handleAddOneAttendee} attendee={attendee} />
       </DialogContent>
     </Dialog>
   );
