@@ -1,9 +1,7 @@
-import AddAttendeeModal from "@/components/features/steps/add-attendee-modal";
-import AttendeeTable from "@/components/features/steps/addendees-table";
-import ConfirmationStepEmail from "@/components/features/steps/confirmation-step-email";
-import StepHeader from "@/components/features/steps/step-header";
-import StepTitle from "@/components/features/steps/step-title";
-import UploadCsv from "@/components/features/steps/upload-csv";
+import AttendeeManagement from "@/components/features/step-import/attendee-management";
+import ConfirmationStepEmail from "@/components/features/step-import/confirmation-step-email";
+import StepHeader from "@/components/features/step/step-header";
+import StepTitle from "@/components/features/step/step-title";
 
 export default function Page() {
   return (
@@ -16,11 +14,7 @@ export default function Page() {
         longDescription="Il est possible d'ajouter plusieurs personnes en même temps avec un fichier CSV ou de rentrer des personnes manuellement."
         className="mb-6"
       />
-      <div className="mb-2 flex flex-col gap-4 sm:flex-row sm:items-end">
-        <UploadCsv />
-        <AddAttendeeModal />
-      </div>
-      <AttendeeTable />
+      <AttendeeManagement />
     </div>
   );
 }

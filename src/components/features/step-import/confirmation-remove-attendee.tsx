@@ -14,11 +14,11 @@ import {
 import { Button } from "@/components/ui/button";
 import { Trash } from "lucide-react";
 
-const ConfirmationRemoveAttendee = () => {
-  const handleContinue = () => {
-    console.log("Delete participant");
-  };
+interface ConfirmationRemoveAttendeeProps {
+  onConfirm: () => void;
+}
 
+const ConfirmationRemoveAttendee = ({ onConfirm }: ConfirmationRemoveAttendeeProps) => {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
@@ -35,7 +35,7 @@ const ConfirmationRemoveAttendee = () => {
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction onClick={handleContinue}>Continuer</AlertDialogAction>
+          <AlertDialogAction onClick={onConfirm}>Continuer</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
