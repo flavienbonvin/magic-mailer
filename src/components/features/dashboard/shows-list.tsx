@@ -1,5 +1,5 @@
 import Muted from "@/components/typography/muted";
-import Show from "@/dto/models/show";
+import Show from "@/data/models/show";
 import { addDays, subDays } from "date-fns";
 import ShowCard from "./show-card";
 

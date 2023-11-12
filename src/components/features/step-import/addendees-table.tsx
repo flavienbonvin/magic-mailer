@@ -8,7 +8,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { CSVAttendee } from "@/dto/models/csvAttendee";
+import { CSVAttendee } from "@/data/models/csvAttendee";
 import { Pen } from "lucide-react";
 import ConfirmationRemoveAttendee from "./confirmation-remove-attendee";
 

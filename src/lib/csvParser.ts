@@ -1,4 +1,4 @@
-import { CSVAttendee, CSVAttendeeParser } from "@/dto/models/csvAttendee";
+import { CSVAttendee, CSVAttendeeParser } from "@/data/models/csvAttendee";
 import Papa from "papaparse";
 
 export const parseFileToAttendees = (file: File, callback: (data: CSVAttendee[]) => void) => {
