@@ -10,6 +10,7 @@ export const PAGES = {
   SUMMARY: "/summary",
   HELP: "/help",
   ADMIN: "/admin",
+  EXPERIENCE: "/experience",
 };
 
 export const EDGE_CONFIG = {

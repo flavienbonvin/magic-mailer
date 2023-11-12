@@ -3,8 +3,12 @@ import { AUTH_COOKIE, PAGES } from "./constants";
 import { hasValidCookie } from "./data/helpers/cookie";
 
 export function middleware(request: NextRequest) {
-  const validCookie = hasValidCookie();
+  // Public page
+  if (request.nextUrl.pathname === PAGES.EXPERIENCE) {
+    return NextResponse.next();
+  }
 
+  const validCookie = hasValidCookie();
   if (request.nextUrl.pathname === PAGES.LOGOUT) {
     const response = NextResponse.redirect(new URL(PAGES.LOGIN, request.url));
     response.cookies.delete(AUTH_COOKIE);
