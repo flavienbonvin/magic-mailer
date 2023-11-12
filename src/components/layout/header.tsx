@@ -3,6 +3,7 @@ import { Home } from "lucide-react";
 import Link from "next/link";
 import Logo from "../atoms/logo";
 import ThemeSwitcher from "../atoms/theme-switcher";
+import UserMenu from "../atoms/user-menu";
 import { Button } from "../ui/button";
 
 const Header = () => {
@@ -17,6 +18,7 @@ const Header = () => {
         <Logo />
       </span>
       <ThemeSwitcher />
+      <UserMenu />
     </header>
   );
 };

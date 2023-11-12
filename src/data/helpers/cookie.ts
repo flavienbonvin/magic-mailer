@@ -17,6 +17,11 @@ export const hasValidCookie = () => {
   return cookieStore.has(AUTH_COOKIE);
 };
 
+export const getCookie = () => {
+  const cookieStore = cookies();
+  return cookieStore.get(AUTH_COOKIE);
+};
+
 export const createCookie = (email: string) => {
   const cookieStore = cookies();
   cookieStore.set(AUTH_COOKIE, email, getCookiesOptions(email));

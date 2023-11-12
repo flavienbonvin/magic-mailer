@@ -1,13 +1,21 @@
 import { NextRequest, NextResponse } from "next/server";
-import { PAGES } from "./constants";
+import { AUTH_COOKIE, PAGES } from "./constants";
 import { hasValidCookie } from "./data/helpers/cookie";
 
 export function middleware(request: NextRequest) {
   const validCookie = hasValidCookie();
 
-  if (request.nextUrl.pathname === "/" && validCookie) {
+  if (request.nextUrl.pathname === PAGES.LOGOUT) {
+    const response = NextResponse.redirect(new URL(PAGES.LOGIN, request.url));
+    response.cookies.delete(AUTH_COOKIE);
+    return response;
+  }
+
+  if (request.nextUrl.pathname === PAGES.LOGIN && validCookie) {
     return NextResponse.redirect(new URL(PAGES.DASHBOARD, request.url));
-  } else if (request.nextUrl.pathname !== "/" && !validCookie) {
+  }
+
+  if (request.nextUrl.pathname !== PAGES.LOGIN && !validCookie) {
     return NextResponse.redirect(new URL(PAGES.LOGIN, request.url));
   }
 
