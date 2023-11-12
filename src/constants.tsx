@@ -8,4 +8,11 @@ export const PAGES = {
   STEP1: "/steps/1",
   STEP2: "/steps/2",
   SUMMARY: "/summary",
+  HELP: "/help",
+  ADMIN: "/admin",
+};
+
+export const EDGE_CONFIG = {
+  ALLOWED_EMAILS: "allowedEmails",
+  ALLOWED_ADMIN_EMAILS: "adminEmails",
 };
