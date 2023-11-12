@@ -1,4 +1,4 @@
-import { CSVAttendee } from "@/dto/models/csvAttendee";
+import { CSVAttendee } from "@/data/models/csvAttendee";
 import { parseFileToAttendees } from "@/lib/csvParser";
 import { useState } from "react";
 

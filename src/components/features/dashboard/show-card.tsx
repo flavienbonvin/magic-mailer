@@ -1,5 +1,5 @@
 import { PAGES } from "@/constants";
-import Show from "@/dto/models/show";
+import Show from "@/data/models/show";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import Muted from "../../typography/muted";

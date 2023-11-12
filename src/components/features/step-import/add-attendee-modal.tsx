@@ -10,7 +10,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { CSVAttendee } from "@/dto/models/csvAttendee";
+import { CSVAttendee } from "@/data/models/csvAttendee";
 import AddAttendeeForm from "./add-attendee-form";
 
 interface AddAttendeeModalProps {
