@@ -1,5 +1,5 @@
 import { PAGES } from "@/constants";
-import { Home } from "lucide-react";
+import { HelpCircle, Home } from "lucide-react";
 import Link from "next/link";
 import Logo from "../atoms/logo";
 import ThemeSwitcher from "../atoms/theme-switcher";
@@ -18,6 +18,11 @@ const Header = () => {
         <Logo />
       </span>
       <ThemeSwitcher />
+      <Link href="/help">
+        <Button size="icon" variant="ghost">
+          <HelpCircle />
+        </Button>
+      </Link>
       <UserMenu />
     </header>
   );
