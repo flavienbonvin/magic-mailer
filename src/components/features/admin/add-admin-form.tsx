@@ -64,7 +64,7 @@ const AddAdminForm = () => {
               <div className="space-y-1 leading-none">
                 <FormLabel>Est-ce un administrateur?</FormLabel>
                 <FormDescription>
-                  Les administrateurs peuvent donner accès à l'application
+                  Les administrateurs peuvent donner accès à l&apos;application
                 </FormDescription>
               </div>
             </FormItem>

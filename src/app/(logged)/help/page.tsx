@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export default function Page() {
   return (
-    <div className="prose prose-stone dark:prose-invert container">
+    <div className="container prose prose-stone dark:prose-invert">
       <p>
         Ce site vous permet l&apos;envoi des emails contenant les prédictions faites lors de la
         représenation.
