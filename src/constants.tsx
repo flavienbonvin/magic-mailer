@@ -12,8 +12,3 @@ export const PAGES = {
   ADMIN: "/admin",
   EXPERIENCE: "/experience",
 };
-
-export const EDGE_CONFIG = {
-  ALLOWED_EMAILS: "allowedEmails",
-  ALLOWED_ADMIN_EMAILS: "adminEmails",
-};

@@ -1,5 +1,5 @@
 import { PAGES } from "@/constants";
-import { isLoggedUserAdmin } from "@/data/dto/auth";
+import { getUser } from "@/data/actions/user";
 import { getCookie } from "@/data/helpers/cookie";
 import { MenuIcon } from "lucide-react";
 import Link from "next/link";
@@ -15,7 +15,7 @@ import {
 
 const UserMenu = async () => {
   const cookie = getCookie()?.value;
-  const isAdmin = await isLoggedUserAdmin();
+  const user = await getUser(cookie);
 
   return (
     <DropdownMenu>
@@ -26,7 +26,7 @@ const UserMenu = async () => {
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuLabel>Magic Mail</DropdownMenuLabel>
-        {isAdmin && (
+        {user?.isAdmin && (
           <>
             <DropdownMenuSeparator />
             <Link href={PAGES.ADMIN}>

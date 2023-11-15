@@ -12,13 +12,14 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { addAccessToEmail } from "@/data/dto/auth";
+import { insertUser } from "@/data/actions/user";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 const formSchema = z.object({
   email: z.string().email({ message: "L'adresse email n'est pas valide." }),
+  name: z.string().optional(),
   isAdmin: z.boolean().optional(),
 });
 
@@ -34,7 +35,7 @@ const AddAdminForm = () => {
   });
 
   const onSubmit = async (data: FormSchema) => {
-    await addAccessToEmail(data.email, data.isAdmin ?? false);
+    await insertUser({ email: data.email, isAdmin: data.isAdmin ?? false });
   };
 
   return (

@@ -2,46 +2,29 @@
 
 import { Button } from "@/components/ui/button";
 import { TableCell } from "@/components/ui/table";
-import { removeAccessToEmail, toggleAddminAccessToAddress } from "@/data/dto/auth";
+import { deleteUser, toggleAdmin } from "@/data/actions/user";
 import { ArrowDown, ArrowUp, Trash } from "lucide-react";
-import { useState } from "react";
 
 interface AdminActionProps {
-  email: string;
+  id: string;
   isAdmin: boolean;
 }
 
-const AdminAction = ({ email, isAdmin }: AdminActionProps) => {
-  const [loading, setLoading] = useState(false);
-
+const AdminAction = ({ id, isAdmin }: AdminActionProps) => {
   const handleDelete = async () => {
-    setLoading(true);
-    await removeAccessToEmail(email);
+    await deleteUser(id);
   };
 
   const handleToggleAdminStatus = async () => {
-    setLoading(true);
-    await toggleAddminAccessToAddress(email);
+    await toggleAdmin(id, isAdmin);
   };
 
   return (
     <TableCell className="text-right">
-      <Button
-        disabled={loading}
-        size="icon"
-        variant="ghost"
-        className="mr-2"
-        onClick={handleToggleAdminStatus}
-      >
+      <Button size="icon" variant="ghost" className="mr-2" onClick={handleToggleAdminStatus}>
         {isAdmin ? <ArrowDown size={16} /> : <ArrowUp size={16} />}
       </Button>
-      <Button
-        disabled={loading}
-        size="icon"
-        variant="ghost"
-        className="mr-2"
-        onClick={handleDelete}
-      >
+      <Button size="icon" variant="ghost" className="mr-2" onClick={handleDelete}>
         <Trash size={16} />
       </Button>
     </TableCell>
