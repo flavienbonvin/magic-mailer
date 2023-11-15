@@ -10,7 +10,6 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { getAllUsers } from "@/data/actions/user";
-import { ThumbsDown, ThumbsUp } from "lucide-react";
 
 interface Data {
   id: string;
@@ -42,7 +41,7 @@ export default async function Page() {
             <TableHeader>
               <TableRow>
                 <TableHead className="w-4/12">Email</TableHead>
-                <TableHead className="w-2/12">Admin</TableHead>
+                <TableHead className="w-2/12">Role</TableHead>
                 <TableHead className="w-2/12 text-right">Action</TableHead>
               </TableRow>
             </TableHeader>
@@ -50,9 +49,7 @@ export default async function Page() {
               {data.map(({ email, isAdmin, id }) => (
                 <TableRow key={id}>
                   <TableCell>{email}</TableCell>
-                  <TableCell className="text-right">
-                    {isAdmin ? <ThumbsUp size={16} /> : <ThumbsDown size={16} />}
-                  </TableCell>
+                  <TableCell>{isAdmin ? "administrateur" : "utilisateur"}</TableCell>
                   <AdminAction id={id!} isAdmin={!!isAdmin} />
                 </TableRow>
               ))}
