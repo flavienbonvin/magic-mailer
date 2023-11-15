@@ -1,5 +1,5 @@
 import { PAGES } from "@/constants";
-import Show from "@/data/models/show";
+import { Show, ShowStatus } from "@/data/schema";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import Muted from "../../typography/muted";
@@ -17,28 +17,30 @@ interface ShowCardProps {
   show: Show;
 }
 
-const ShowStatus = ({ finished }: { finished: boolean }) => {
+const ShowStatusLine = ({ finished }: { finished: boolean }) => {
   return (
     <div className="flex place-items-center gap-1">
       <p className={cn("h-2 w-2 rounded-full", finished ? "bg-lime-500" : "bg-amber-500")} />
-      <Muted>{finished ? "Terminé" : "En cours"}</Muted>
+      <Muted>{finished ? "Terminé" : "À venir"}</Muted>
     </div>
   );
 };
 
 const ShowCard = ({ show }: ShowCardProps) => {
+  const finished = show.status === ShowStatus.finished;
+
   return (
     <Card>
       <CardHeader>
         <CardTitle>{show.name}</CardTitle>
-        <CardDescription>{show.date.toLocaleDateString()}</CardDescription>
+        <CardDescription>{show.date.toDateString()}</CardDescription>
       </CardHeader>
       <CardContent>
-        <ShowStatus finished={show.finished} />
+        <ShowStatusLine finished={show.status === ShowStatus.finished} />
       </CardContent>
       <CardFooter>
         <Button size="sm" variant="outline" asChild>
-          {show.finished ? (
+          {finished ? (
             <Link href={PAGES.SUMMARY}>Résumé</Link>
           ) : (
             <Link href={PAGES.STEP1}>Commencer</Link>

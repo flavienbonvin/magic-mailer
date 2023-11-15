@@ -11,6 +11,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { insertShow } from "@/data/actions/show";
+import { ShowStatus } from "@/data/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -31,8 +33,12 @@ const CreateShowForm = () => {
     },
   });
 
-  const onSubmit = (data: FormSchema) => {
-    console.log(data);
+  const onSubmit = async (data: FormSchema) => {
+    await insertShow({
+      name: data.name,
+      date: data.date,
+      status: ShowStatus.incoming,
+    });
   };
 
   return (
