@@ -8,7 +8,7 @@ const ThemeProvider = dynamic(() => import("../components/containers/theme-provi
   ssr: false,
 });
 
-export const fontSans = Inter({
+const fontSans = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
 });
