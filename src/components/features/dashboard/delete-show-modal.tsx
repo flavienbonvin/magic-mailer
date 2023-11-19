@@ -12,34 +12,41 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
+import { deleteShow } from "@/data/actions/show";
+import { Show } from "@/data/schema";
 import { Trash } from "lucide-react";
 
-interface ConfirmationRemoveAttendeeProps {
-  onConfirm: () => void;
+interface CreateShowModalProps {
+  show: Show;
 }
 
-const ConfirmationRemoveAttendee = ({ onConfirm }: ConfirmationRemoveAttendeeProps) => {
+const DeleteShowModal = ({ show }: CreateShowModalProps) => {
+  const handleDelete = async () => {
+    if (!show.id) return;
+    await deleteShow(show.id);
+  };
+
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button size="icon" variant="ghost" className="hover:text-red-600">
+        <Button size="icon" variant="ghost">
           <Trash size={16} />
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Confirmez la suppression du participant</AlertDialogTitle>
+          <AlertDialogTitle>Suppréssion de la représentation</AlertDialogTitle>
           <AlertDialogDescription>
-            Voulez-vous vraiment supprimer le participant ?
+            {`Êtes-vous sûr de vouloir supprimer la représentation ${show.name} ?`}
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Annuler</AlertDialogCancel>
-          <AlertDialogAction onClick={onConfirm}>Continuer</AlertDialogAction>
+          <AlertDialogAction onClick={handleDelete}>Supprimer</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
   );
 };
 
-export default ConfirmationRemoveAttendee;
+export default DeleteShowModal;

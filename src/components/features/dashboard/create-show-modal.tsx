@@ -11,11 +11,14 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Plus } from "lucide-react";
+import { useState } from "react";
 import CreateShowForm from "./create-show-form";
 
 const CreateShowModal = () => {
+  const [open, setOpen] = useState(false);
+
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button className="place-self-end">
           <Plus size={16} className="mr-2" />
@@ -33,7 +36,7 @@ const CreateShowModal = () => {
             </Muted>
           </DialogDescription>
         </DialogHeader>
-        <CreateShowForm />
+        <CreateShowForm setOpen={setOpen} />
       </DialogContent>
     </Dialog>
   );

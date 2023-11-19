@@ -12,6 +12,7 @@ import {
   CardHeader,
   CardTitle,
 } from "../../ui/card";
+import DeleteShowModal from "./delete-show-modal";
 
 interface ShowCardProps {
   show: Show;
@@ -38,7 +39,7 @@ const ShowCard = ({ show }: ShowCardProps) => {
       <CardContent>
         <ShowStatusLine finished={show.status === ShowStatus.finished} />
       </CardContent>
-      <CardFooter>
+      <CardFooter className="flex justify-between">
         <Button size="sm" variant="outline" asChild>
           {finished ? (
             <Link href={PAGES.SUMMARY}>Résumé</Link>
@@ -46,6 +47,7 @@ const ShowCard = ({ show }: ShowCardProps) => {
             <Link href={PAGES.STEP1}>Commencer</Link>
           )}
         </Button>
+        {show.status === ShowStatus.incoming && <DeleteShowModal show={show} />}
       </CardFooter>
     </Card>
   );

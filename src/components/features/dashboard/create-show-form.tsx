@@ -24,7 +24,11 @@ const formSchema = z.object({
 
 type FormSchema = z.infer<typeof formSchema>;
 
-const CreateShowForm = () => {
+interface CreateShowFormProps {
+  setOpen: (value: boolean) => void;
+}
+
+const CreateShowForm = ({ setOpen }: CreateShowFormProps) => {
   const form = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -39,6 +43,7 @@ const CreateShowForm = () => {
       date: data.date,
       status: ShowStatus.incoming,
     });
+    setOpen(false);
   };
 
   return (
