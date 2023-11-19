@@ -11,8 +11,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { insertShow } from "@/data/actions/show";
-import { ShowStatus } from "@/data/schema";
+import { insertShow, updateShow } from "@/data/actions/show";
+import { Show, ShowStatus } from "@/data/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -25,24 +25,32 @@ const formSchema = z.object({
 type FormSchema = z.infer<typeof formSchema>;
 
 interface CreateShowFormProps {
+  show?: Show;
   setOpen: (value: boolean) => void;
 }
 
-const CreateShowForm = ({ setOpen }: CreateShowFormProps) => {
+const CreateEditShowForm = ({ show, setOpen }: CreateShowFormProps) => {
   const form = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: "",
-      date: new Date(),
+      name: show?.name ?? "",
+      date: show?.date ?? new Date(),
     },
   });
 
   const onSubmit = async (data: FormSchema) => {
-    await insertShow({
-      name: data.name,
-      date: data.date,
+    const showData = {
+      ...data,
       status: ShowStatus.incoming,
-    });
+    };
+
+    if (show && show.id) {
+      await updateShow(show.id, showData);
+      setOpen(false);
+      return;
+    }
+
+    await insertShow(showData);
     setOpen(false);
   };
 
@@ -84,4 +92,4 @@ const CreateShowForm = ({ setOpen }: CreateShowFormProps) => {
   );
 };
 
-export default CreateShowForm;
+export default CreateEditShowForm;

@@ -12,6 +12,7 @@ import {
   CardHeader,
   CardTitle,
 } from "../../ui/card";
+import CreateEditShowModal from "./create-edit-show-modal";
 import DeleteShowModal from "./delete-show-modal";
 
 interface ShowCardProps {
@@ -47,7 +48,12 @@ const ShowCard = ({ show }: ShowCardProps) => {
             <Link href={PAGES.STEP1}>Commencer</Link>
           )}
         </Button>
-        {show.status === ShowStatus.incoming && <DeleteShowModal show={show} />}
+        {show.status === ShowStatus.incoming && (
+          <div>
+            <CreateEditShowModal show={show} />
+            <DeleteShowModal show={show} />
+          </div>
+        )}
       </CardFooter>
     </Card>
   );

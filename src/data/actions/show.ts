@@ -31,6 +31,11 @@ export const insertShow = async (show: NewShow) => {
   revalidatePath(PAGES.DASHBOARD);
 };
 
+export const updateShow = async (id: string, show: NewShow) => {
+  await db.update(shows).set(show).where(eq(shows.id, id));
+  revalidatePath(PAGES.DASHBOARD);
+};
+
 export const deleteShow = async (id: string) => {
   await db.delete(shows).where(eq(shows.id, id));
   revalidatePath(PAGES.DASHBOARD);

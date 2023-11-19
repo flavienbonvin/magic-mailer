@@ -10,20 +10,31 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Plus } from "lucide-react";
+import { Show } from "@/data/schema";
+import { Pen, Plus } from "lucide-react";
 import { useState } from "react";
-import CreateShowForm from "./create-show-form";
+import CreateEditShowForm from "./create-edit-show-form";
 
-const CreateShowModal = () => {
+interface CreateShowModalProps {
+  show?: Show;
+}
+
+const CreateEditShowModal = ({ show }: CreateShowModalProps) => {
   const [open, setOpen] = useState(false);
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button className="place-self-end">
-          <Plus size={16} className="mr-2" />
-          Créer une représentation
-        </Button>
+        {show ? (
+          <Button size="icon" variant="ghost">
+            <Pen size={16} />
+          </Button>
+        ) : (
+          <Button className="place-self-end">
+            <Plus size={16} className="mr-2" />
+            Créer une représentation
+          </Button>
+        )}
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
@@ -36,10 +47,10 @@ const CreateShowModal = () => {
             </Muted>
           </DialogDescription>
         </DialogHeader>
-        <CreateShowForm setOpen={setOpen} />
+        <CreateEditShowForm setOpen={setOpen} show={show} />
       </DialogContent>
     </Dialog>
   );
 };
 
-export default CreateShowModal;
+export default CreateEditShowModal;
