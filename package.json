@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "pretty": "prettier --write .",
-    "db:migrate": "drizzle-kit push:pg"
+    "db:migrate": "drizzle-kit push:pg",
+    "db:seed": "bun run ./src/data/seed.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.2",
