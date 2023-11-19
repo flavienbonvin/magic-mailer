@@ -1,6 +1,5 @@
 "use client";
 
-import { useAttendeeContext } from "@/components/containers/attendee-provider";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -11,7 +10,11 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { insertAttendee, isEmailAlreadyRegistered, updateAttendee } from "@/data/actions/attendees";
+import { Attendee } from "@/data/schema";
+import { toastSaveAttendee } from "@/lib/toaster";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -23,34 +26,46 @@ const formSchema = z.object({
 
 type FormSchema = z.infer<typeof formSchema>;
 
-const CreateEditAttendeeForm = () => {
-  const { editedAttendee, addAttendee, setOpenModal, updateAttendee, isEmailAlreadyUsed } =
-    useAttendeeContext();
+interface CreateEditAttendeeFormProps {
+  attendee?: Attendee;
+  setOpen: (value: boolean) => void;
+}
+
+const CreateEditAttendeeForm = ({ attendee, setOpen }: CreateEditAttendeeFormProps) => {
+  const showID = useSearchParams().get("showID");
 
   const form = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      firstName: editedAttendee?.firstName ?? "",
-      lastName: editedAttendee?.lastName ?? "",
-      email: editedAttendee?.email ?? "",
+      firstName: attendee?.firstName ?? "",
+      lastName: attendee?.lastName ?? "",
+      email: attendee?.email ?? "",
     },
   });
 
-  const onSubmit = (data: FormSchema) => {
-    if (isEmailAlreadyUsed(data.email)) {
-      form.setError("email", {
-        type: "manual",
-        message: "Cette adresse email est déjà utilisée.",
-      });
+  const onSubmit = async (data: FormSchema) => {
+    // This should never happen because users are redirected when accessing this step without a showID
+    if (!showID || isNaN(+showID)) {
       return;
     }
 
-    if (editedAttendee && editedAttendee?.id) {
-      updateAttendee({ ...editedAttendee, ...data });
+    if (attendee && attendee.id) {
+      await updateAttendee(attendee.id, data);
     } else {
-      addAttendee({ id: crypto.randomUUID(), ...data });
+      const isPresent = await isEmailAlreadyRegistered(data.email, +showID);
+      if (isPresent) {
+        form.setError("email", {
+          type: "manual",
+          message: "Cette adresse email est déjà utilisée.",
+        });
+        return;
+      }
+
+      await insertAttendee({ ...data, linkedShow: +showID });
     }
-    setOpenModal(false);
+
+    toastSaveAttendee();
+    setOpen(false);
   };
 
   return (

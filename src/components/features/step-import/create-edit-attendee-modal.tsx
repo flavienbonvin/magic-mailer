@@ -1,6 +1,5 @@
 "use client";
 
-import { useAttendeeContext } from "@/components/containers/attendee-provider";
 import Muted from "@/components/typography/muted";
 import { Button } from "@/components/ui/button";
 import {
@@ -11,17 +10,30 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { Attendee } from "@/data/schema";
+import { Pen } from "lucide-react";
+import { useState } from "react";
 import CreateEditAttendeeForm from "./create-edit-attendee-form";
 
-const CreateEditAttendeeModal = () => {
-  const { openModal, setOpenModal } = useAttendeeContext();
+interface CreateEditAttendeeModalProps {
+  attendee?: Attendee;
+}
+
+const CreateEditAttendeeModal = ({ attendee }: CreateEditAttendeeModalProps) => {
+  const [open, setOpen] = useState(false);
 
   return (
-    <Dialog open={openModal} onOpenChange={setOpenModal}>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button size="sm" variant="outline">
-          Ajouter manuellement
-        </Button>
+        {attendee ? (
+          <Button size="icon" variant="ghost">
+            <Pen size={16} />
+          </Button>
+        ) : (
+          <Button size="sm" variant="outline">
+            Ajouter manuellement
+          </Button>
+        )}
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
@@ -30,7 +42,7 @@ const CreateEditAttendeeModal = () => {
             <Muted className="mb-4">Ajoutez un participant à la main</Muted>
           </DialogDescription>
         </DialogHeader>
-        <CreateEditAttendeeForm />
+        <CreateEditAttendeeForm attendee={attendee} setOpen={setOpen} />
       </DialogContent>
     </Dialog>
   );

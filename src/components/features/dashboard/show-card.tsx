@@ -45,7 +45,7 @@ const ShowCard = ({ show }: ShowCardProps) => {
           {finished ? (
             <Link href={PAGES.SUMMARY}>Résumé</Link>
           ) : (
-            <Link href={PAGES.STEP1}>Commencer</Link>
+            <Link href={PAGES.STEP1(show.id)}>Commencer</Link>
           )}
         </Button>
         {show.status === ShowStatus.incoming && (

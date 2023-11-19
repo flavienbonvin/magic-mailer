@@ -24,7 +24,7 @@ export const getAllowedEmails = async () => {
   return await db.select({ email: users.email }).from(users);
 };
 
-export const toggleAdmin = async (id: string, isAdmin: boolean) => {
+export const toggleAdmin = async (id: number, isAdmin: boolean) => {
   await db.update(users).set({ isAdmin: !isAdmin }).where(eq(users.id, id));
   revalidatePath(PAGES.ADMIN);
 };
@@ -34,7 +34,7 @@ export const insertUser = async (data: NewUser) => {
   revalidatePath(PAGES.ADMIN);
 };
 
-export const deleteUser = async (userId: string) => {
+export const deleteUser = async (userId: number) => {
   await db.delete(users).where(eq(users.id, userId));
   revalidatePath(PAGES.ADMIN);
 };

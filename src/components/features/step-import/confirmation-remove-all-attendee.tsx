@@ -12,32 +12,30 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
-import { deleteAttendee } from "@/data/actions/attendees";
-import { toastDeletedAttendee } from "@/lib/toaster";
-import { Trash } from "lucide-react";
+import { deleteAllAttendeesForShow } from "@/data/actions/attendees";
 
 interface ConfirmationRemoveAttendeeProps {
-  attendeeId: number;
+  showID: number;
+  disabled: boolean;
 }
 
-const ConfirmationRemoveAttendee = ({ attendeeId }: ConfirmationRemoveAttendeeProps) => {
+const ConfirmationRemoveAllAttendee = ({ disabled, showID }: ConfirmationRemoveAttendeeProps) => {
   const onConfirm = async () => {
-    await deleteAttendee(attendeeId);
-    toastDeletedAttendee();
+    await deleteAllAttendeesForShow(showID);
   };
 
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button size="icon" variant="ghost" className="hover:text-red-600">
-          <Trash size={16} />
+        <Button size="sm" variant="outline" disabled={disabled}>
+          Supprimer toutes les données
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Confirmez la suppression du participant</AlertDialogTitle>
+          <AlertDialogTitle>Confirmez la suppression de tous les participant</AlertDialogTitle>
           <AlertDialogDescription>
-            Voulez-vous vraiment supprimer le participant ?
+            Voulez-vous vraiment supprimer tous participant ?
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
@@ -49,4 +47,4 @@ const ConfirmationRemoveAttendee = ({ attendeeId }: ConfirmationRemoveAttendeePr
   );
 };
 
-export default ConfirmationRemoveAttendee;
+export default ConfirmationRemoveAllAttendee;

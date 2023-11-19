@@ -6,7 +6,7 @@ import { deleteUser, toggleAdmin } from "@/data/actions/user";
 import { ArrowDown, ArrowUp, Trash } from "lucide-react";
 
 interface AdminActionProps {
-  id: string;
+  id: number;
   isAdmin: boolean;
 }
 

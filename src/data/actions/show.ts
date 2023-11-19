@@ -31,12 +31,12 @@ export const insertShow = async (show: NewShow) => {
   revalidatePath(PAGES.DASHBOARD);
 };
 
-export const updateShow = async (id: string, show: NewShow) => {
+export const updateShow = async (id: number, show: NewShow) => {
   await db.update(shows).set(show).where(eq(shows.id, id));
   revalidatePath(PAGES.DASHBOARD);
 };
 
-export const deleteShow = async (id: string) => {
+export const deleteShow = async (id: number) => {
   await db.delete(shows).where(eq(shows.id, id));
   revalidatePath(PAGES.DASHBOARD);
 };

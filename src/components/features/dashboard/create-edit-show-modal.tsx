@@ -41,7 +41,7 @@ const CreateEditShowModal = ({ show }: CreateShowModalProps) => {
           <DialogTitle className="text-left">
             Création d&apos;une nouvelle repésentation
           </DialogTitle>
-          <DialogDescription className="text-left">
+          <DialogDescription className="text-left" asChild>
             <Muted className="mb-4">
               Informez les données relatives à la représentation et à sa date
             </Muted>
