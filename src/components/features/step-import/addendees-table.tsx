@@ -1,3 +1,4 @@
+import { useAttendeeContext } from "@/components/containers/attendee-provider";
 import { Button } from "@/components/ui/button";
 import {
   Table,
@@ -8,17 +9,12 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { CSVAttendee } from "@/data/models/csvAttendee";
 import { Pen } from "lucide-react";
 import ConfirmationRemoveAttendee from "./confirmation-remove-attendee";
 
-interface AttendeeTableProps {
-  attendees: CSVAttendee[];
-  onEditAttendee: (attendeeID: string) => void;
-  onDeleteAttendee: (attendeeID: string) => void;
-}
+const AttendeeTable = () => {
+  const { handleDeleteAttendee, handleEditAttendee, attendees } = useAttendeeContext();
 
-const AttendeeTable = ({ attendees, onEditAttendee, onDeleteAttendee }: AttendeeTableProps) => {
   return (
     <Table className="max-w-full border">
       <TableCaption>{attendees.length} personnes présentes à la représentation</TableCaption>
@@ -42,11 +38,11 @@ const AttendeeTable = ({ attendees, onEditAttendee, onDeleteAttendee }: Attendee
                 size="icon"
                 variant="ghost"
                 className="mr-2"
-                onClick={() => onEditAttendee(id)}
+                onClick={() => handleEditAttendee(id)}
               >
                 <Pen size={16} />
               </Button>
-              <ConfirmationRemoveAttendee onConfirm={() => onDeleteAttendee(id)} />
+              <ConfirmationRemoveAttendee onConfirm={() => handleDeleteAttendee(id)} />
             </TableCell>
           </TableRow>
         ))}

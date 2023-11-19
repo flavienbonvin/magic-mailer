@@ -1,5 +1,6 @@
 "use client";
 
+import { useAttendeeContext } from "@/components/containers/attendee-provider";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -10,7 +11,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { CSVAttendee } from "@/data/models/csvAttendee";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -23,23 +23,34 @@ const formSchema = z.object({
 
 type FormSchema = z.infer<typeof formSchema>;
 
-interface AddAttendeeFormProps {
-  onAddAttendee: (data: CSVAttendee) => void;
-  attendee?: CSVAttendee;
-}
+const CreateEditAttendeeForm = () => {
+  const { editedAttendee, addAttendee, setOpenModal, updateAttendee, isEmailAlreadyUsed } =
+    useAttendeeContext();
 
-const AddAttendeeForm = ({ onAddAttendee, attendee }: AddAttendeeFormProps) => {
   const form = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      firstName: attendee?.firstName ?? "",
-      lastName: attendee?.lastName ?? "",
-      email: attendee?.email ?? "",
+      firstName: editedAttendee?.firstName ?? "",
+      lastName: editedAttendee?.lastName ?? "",
+      email: editedAttendee?.email ?? "",
     },
   });
 
   const onSubmit = (data: FormSchema) => {
-    onAddAttendee({ id: attendee?.id ?? crypto.randomUUID(), ...data });
+    if (isEmailAlreadyUsed(data.email)) {
+      form.setError("email", {
+        type: "manual",
+        message: "Cette adresse email est déjà utilisée.",
+      });
+      return;
+    }
+
+    if (editedAttendee && editedAttendee?.id) {
+      updateAttendee({ ...editedAttendee, ...data });
+    } else {
+      addAttendee({ id: crypto.randomUUID(), ...data });
+    }
+    setOpenModal(false);
   };
 
   return (
@@ -90,4 +101,4 @@ const AddAttendeeForm = ({ onAddAttendee, attendee }: AddAttendeeFormProps) => {
   );
 };
 
-export default AddAttendeeForm;
+export default CreateEditAttendeeForm;

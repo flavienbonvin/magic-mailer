@@ -1,4 +1,4 @@
-import AttendeeManagement from "@/components/features/step-import/attendee-management";
+import AttendeeManagementWrapper from "@/components/features/step-import/attendee-management-wrapper";
 import ConfirmationStepEmail from "@/components/features/step-import/confirmation-step-email";
 import StepHeader from "@/components/features/step/step-header";
 import StepTitle from "@/components/features/step/step-title";
@@ -14,7 +14,7 @@ export default function Page() {
         longDescription="Il est possible d'ajouter plusieurs personnes en même temps avec un fichier CSV ou de rentrer des personnes manuellement."
         className="mb-6"
       />
-      <AttendeeManagement />
+      <AttendeeManagementWrapper />
     </div>
   );
 }

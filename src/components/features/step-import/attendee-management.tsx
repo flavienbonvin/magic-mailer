@@ -1,46 +1,30 @@
 "use client";
 
+import { useAttendeeContext } from "@/components/containers/attendee-provider";
 import { Button } from "@/components/ui/button";
 import FileUploadButton from "@/components/ui/file-upload";
-import useAttendeeManagement from "@/hooks/useAttendeeManagement";
 import { Upload } from "lucide-react";
-import AddAttendeeModal from "./add-attendee-modal";
 import AttendeeTable from "./addendees-table";
+import CreateEditAttendeeModal from "./create-edit-attendee-modal";
 
 const AttendeeManagement = () => {
-  const {
-    openModal,
-    setOpenModal,
-    editedAttendee,
-    setEditedAttendee,
-    attendees,
-    setAttendees,
-    handleNewFile,
-    handleAddOneAttendee,
-    handleDeleteAttendee,
-    handleEditAttendee,
-  } = useAttendeeManagement();
+  const { attendees, addNewFile, resetAttendees } = useAttendeeContext();
 
   return (
     <>
       <div className="mb-2 flex flex-col justify-between sm:flex-row">
         <div className="mb-6 flex flex-col gap-2 sm:mb-0 sm:flex-row sm:gap-4">
-          <FileUploadButton accept=".csv" onFilechange={handleNewFile}>
+          <FileUploadButton accept=".csv" onFilechange={addNewFile}>
             <>
               <Upload size={16} className="mr-2" />
               Upload CSV
             </>
           </FileUploadButton>
-          <AddAttendeeModal
-            onAddAttendee={handleAddOneAttendee}
-            attendee={editedAttendee}
-            open={openModal}
-            setOpen={setOpenModal}
-          />
+          <CreateEditAttendeeModal />
         </div>
         <Button
           disabled={!attendees.length}
-          onClick={() => setAttendees([])}
+          onClick={() => resetAttendees()}
           size="sm"
           variant="outline"
         >
@@ -54,13 +38,7 @@ const AttendeeManagement = () => {
           </p>
         </div>
       )}
-      {attendees.length > 0 && (
-        <AttendeeTable
-          attendees={attendees}
-          onDeleteAttendee={handleDeleteAttendee}
-          onEditAttendee={handleEditAttendee}
-        />
-      )}
+      {attendees.length > 0 && <AttendeeTable attendees={attendees} />}
     </>
   );
 };

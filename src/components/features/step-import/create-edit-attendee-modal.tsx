@@ -1,5 +1,6 @@
 "use client";
 
+import { useAttendeeContext } from "@/components/containers/attendee-provider";
 import Muted from "@/components/typography/muted";
 import { Button } from "@/components/ui/button";
 import {
@@ -10,24 +11,13 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { CSVAttendee } from "@/data/models/csvAttendee";
-import AddAttendeeForm from "./add-attendee-form";
+import CreateEditAttendeeForm from "./create-edit-attendee-form";
 
-interface AddAttendeeModalProps {
-  onAddAttendee: (data: CSVAttendee) => void;
-  attendee?: CSVAttendee;
-  open: boolean;
-  setOpen: (open: boolean) => void;
-}
-
-const AddAttendeeModal = ({ onAddAttendee, open, setOpen, attendee }: AddAttendeeModalProps) => {
-  const handleAddOneAttendee = (attendee: CSVAttendee) => {
-    onAddAttendee(attendee);
-    setOpen(false);
-  };
+const CreateEditAttendeeModal = () => {
+  const { openModal, setOpenModal } = useAttendeeContext();
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={openModal} onOpenChange={setOpenModal}>
       <DialogTrigger asChild>
         <Button size="sm" variant="outline">
           Ajouter manuellement
@@ -40,10 +30,10 @@ const AddAttendeeModal = ({ onAddAttendee, open, setOpen, attendee }: AddAttende
             <Muted className="mb-4">Ajoutez un participant à la main</Muted>
           </DialogDescription>
         </DialogHeader>
-        <AddAttendeeForm onAddAttendee={handleAddOneAttendee} attendee={attendee} />
+        <CreateEditAttendeeForm />
       </DialogContent>
     </Dialog>
   );
 };
 
-export default AddAttendeeModal;
+export default CreateEditAttendeeModal;
