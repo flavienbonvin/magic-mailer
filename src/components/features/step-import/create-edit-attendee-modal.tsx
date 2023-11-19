@@ -10,28 +10,30 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { CSVAttendee } from "@/data/models/csvAttendee";
-import AddAttendeeForm from "./add-attendee-form";
+import { Attendee } from "@/data/schema";
+import { Pen } from "lucide-react";
+import { useState } from "react";
+import CreateEditAttendeeForm from "./create-edit-attendee-form";
 
-interface AddAttendeeModalProps {
-  onAddAttendee: (data: CSVAttendee) => void;
-  attendee?: CSVAttendee;
-  open: boolean;
-  setOpen: (open: boolean) => void;
+interface CreateEditAttendeeModalProps {
+  attendee?: Attendee;
 }
 
-const AddAttendeeModal = ({ onAddAttendee, open, setOpen, attendee }: AddAttendeeModalProps) => {
-  const handleAddOneAttendee = (attendee: CSVAttendee) => {
-    onAddAttendee(attendee);
-    setOpen(false);
-  };
+const CreateEditAttendeeModal = ({ attendee }: CreateEditAttendeeModalProps) => {
+  const [open, setOpen] = useState(false);
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button size="sm" variant="outline">
-          Ajouter manuellement
-        </Button>
+        {attendee ? (
+          <Button size="icon" variant="ghost">
+            <Pen size={16} />
+          </Button>
+        ) : (
+          <Button size="sm" variant="outline">
+            Ajouter manuellement
+          </Button>
+        )}
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
@@ -40,10 +42,10 @@ const AddAttendeeModal = ({ onAddAttendee, open, setOpen, attendee }: AddAttende
             <Muted className="mb-4">Ajoutez un participant à la main</Muted>
           </DialogDescription>
         </DialogHeader>
-        <AddAttendeeForm onAddAttendee={handleAddOneAttendee} attendee={attendee} />
+        <CreateEditAttendeeForm attendee={attendee} setOpen={setOpen} />
       </DialogContent>
     </Dialog>
   );
 };
 
-export default AddAttendeeModal;
+export default CreateEditAttendeeModal;

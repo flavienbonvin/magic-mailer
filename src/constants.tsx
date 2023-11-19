@@ -5,7 +5,11 @@ export const PAGES = {
   LOGIN: "/",
   LOGOUT: "/logout",
   DASHBOARD: "/dashboard",
-  STEP1: "/steps/1",
+  STEP1: (showId: number) => `/steps/1?showID=${showId}`,
+  SIMPLE_STEP1: "/steps/1",
   STEP2: "/steps/2",
   SUMMARY: "/summary",
+  HELP: "/help",
+  ADMIN: "/admin",
+  EXPERIENCE: "/experience",
 };

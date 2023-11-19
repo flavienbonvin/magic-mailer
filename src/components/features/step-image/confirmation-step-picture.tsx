@@ -36,7 +36,7 @@ const ConfirmationStepPicture = () => {
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogCancel>Annuler</AlertDialogCancel>
           <AlertDialogAction onClick={handleContinue}>Continuer</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

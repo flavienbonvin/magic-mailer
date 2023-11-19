@@ -1,25 +1,35 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import FileUploadButton from "@/components/ui/file-upload";
-import useAttendeeManagement from "@/hooks/useAttendeeManagement";
+import { insertMultipleAttendees } from "@/data/actions/attendees";
+import { CSVAttendee } from "@/data/models/csvAttendee";
+import { Attendee, NewAttendee } from "@/data/schema";
+import { parseFileToAttendees } from "@/lib/csvParser";
+import { toastSaveAttendees } from "@/lib/toaster";
 import { Upload } from "lucide-react";
-import AddAttendeeModal from "./add-attendee-modal";
 import AttendeeTable from "./addendees-table";
+import ConfirmationRemoveAllAttendee from "./confirmation-remove-all-attendee";
+import CreateEditAttendeeModal from "./create-edit-attendee-modal";
 
-const AttendeeManagement = () => {
-  const {
-    openModal,
-    setOpenModal,
-    editedAttendee,
-    setEditedAttendee,
-    attendees,
-    setAttendees,
-    handleNewFile,
-    handleAddOneAttendee,
-    handleDeleteAttendee,
-    handleEditAttendee,
-  } = useAttendeeManagement();
+interface AttendeeManagementProps {
+  attendees: Attendee[];
+  showID: number;
+}
+
+const AttendeeManagement = ({ attendees, showID }: AttendeeManagementProps) => {
+  const handleNewFile = (file: File) => {
+    parseFileToAttendees(file, async (data: CSVAttendee[]) => {
+      const formattedData: NewAttendee[] = data.map((attendee) => ({
+        email: attendee.email ?? "",
+        firstName: attendee.firstName ?? "",
+        lastName: attendee.lastName ?? "",
+        linkedShow: showID,
+      }));
+
+      await insertMultipleAttendees(formattedData);
+      toastSaveAttendees(formattedData.length);
+    });
+  };
 
   return (
     <>
@@ -31,21 +41,9 @@ const AttendeeManagement = () => {
               Upload CSV
             </>
           </FileUploadButton>
-          <AddAttendeeModal
-            onAddAttendee={handleAddOneAttendee}
-            attendee={editedAttendee}
-            open={openModal}
-            setOpen={setOpenModal}
-          />
+          <CreateEditAttendeeModal />
         </div>
-        <Button
-          disabled={!attendees.length}
-          onClick={() => setAttendees([])}
-          size="sm"
-          variant="outline"
-        >
-          Supprimer toutes les données
-        </Button>
+        <ConfirmationRemoveAllAttendee showID={showID} disabled={!attendees.length} />
       </div>
       {attendees.length === 0 && (
         <div className="flex h-32 flex-col items-center justify-center">
@@ -54,13 +52,7 @@ const AttendeeManagement = () => {
           </p>
         </div>
       )}
-      {attendees.length > 0 && (
-        <AttendeeTable
-          attendees={attendees}
-          onDeleteAttendee={handleDeleteAttendee}
-          onEditAttendee={handleEditAttendee}
-        />
-      )}
+      {attendees.length > 0 && <AttendeeTable attendees={attendees} />}
     </>
   );
 };

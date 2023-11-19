@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import {
   Table,
   TableBody,
@@ -8,17 +7,15 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { CSVAttendee } from "@/data/models/csvAttendee";
-import { Pen } from "lucide-react";
+import { Attendee } from "@/data/schema";
 import ConfirmationRemoveAttendee from "./confirmation-remove-attendee";
+import CreateEditAttendeeModal from "./create-edit-attendee-modal";
 
 interface AttendeeTableProps {
-  attendees: CSVAttendee[];
-  onEditAttendee: (attendeeID: string) => void;
-  onDeleteAttendee: (attendeeID: string) => void;
+  attendees: Attendee[];
 }
 
-const AttendeeTable = ({ attendees, onEditAttendee, onDeleteAttendee }: AttendeeTableProps) => {
+const AttendeeTable = ({ attendees }: AttendeeTableProps) => {
   return (
     <Table className="max-w-full border">
       <TableCaption>{attendees.length} personnes présentes à la représentation</TableCaption>
@@ -32,21 +29,14 @@ const AttendeeTable = ({ attendees, onEditAttendee, onDeleteAttendee }: Attendee
         </TableRow>
       </TableHeader>
       <TableBody>
-        {attendees.map(({ id, firstName, lastName, email }) => (
-          <TableRow key={id}>
-            <TableCell className="max-w-0 truncate">{firstName}</TableCell>
-            <TableCell className="max-w-0 truncate">{lastName}</TableCell>
-            <TableCell>{email}</TableCell>
+        {attendees.map((attendee: Attendee) => (
+          <TableRow key={attendee.id}>
+            <TableCell className="max-w-0 truncate">{attendee.firstName}</TableCell>
+            <TableCell className="max-w-0 truncate">{attendee.lastName}</TableCell>
+            <TableCell>{attendee.email}</TableCell>
             <TableCell className="text-right">
-              <Button
-                size="icon"
-                variant="ghost"
-                className="mr-2"
-                onClick={() => onEditAttendee(id)}
-              >
-                <Pen size={16} />
-              </Button>
-              <ConfirmationRemoveAttendee onConfirm={() => onDeleteAttendee(id)} />
+              <CreateEditAttendeeModal attendee={attendee} />
+              <ConfirmationRemoveAttendee attendeeId={attendee.id} />
             </TableCell>
           </TableRow>
         ))}
