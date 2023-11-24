@@ -1,5 +1,6 @@
 "use client";
 
+import RequiredField from "@/components/atoms/required-field";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
@@ -46,7 +47,9 @@ const AddAdminForm = () => {
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Addresse email</FormLabel>
+              <FormLabel>
+                Addresse email <RequiredField />
+              </FormLabel>
               <FormControl>
                 <Input {...field} />
               </FormControl>

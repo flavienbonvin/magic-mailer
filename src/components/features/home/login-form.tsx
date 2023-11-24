@@ -1,5 +1,6 @@
 "use client";
 
+import RequiredField from "@/components/atoms/required-field";
 import ThemeSwitcher from "@/components/atoms/theme-switcher";
 import { Button } from "@/components/ui/button";
 import {
@@ -46,7 +47,9 @@ const LoginForm = () => {
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Addresse email</FormLabel>
+              <FormLabel>
+                Addresse email <RequiredField />
+              </FormLabel>
               <FormControl>
                 <Input {...field} />
               </FormControl>

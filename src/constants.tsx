@@ -12,4 +12,5 @@ export const PAGES = {
   HELP: "/help",
   ADMIN: "/admin",
   EXPERIENCE: "/experience",
+  EXPERIENCE_SUCCESS: "/experience/success",
 };

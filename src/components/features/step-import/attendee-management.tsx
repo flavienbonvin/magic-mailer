@@ -3,7 +3,7 @@
 import FileUploadButton from "@/components/ui/file-upload";
 import { insertMultipleAttendees } from "@/data/actions/attendees";
 import { CSVAttendee } from "@/data/models/csvAttendee";
-import { Attendee, NewAttendee } from "@/data/schema";
+import { Attendee, AttendeeSource, NewAttendee } from "@/data/schema";
 import { parseFileToAttendees } from "@/lib/csvParser";
 import { toastSaveAttendees } from "@/lib/toaster";
 import { Upload } from "lucide-react";
@@ -24,6 +24,7 @@ const AttendeeManagement = ({ attendees, showID }: AttendeeManagementProps) => {
         firstName: attendee.firstName ?? "",
         lastName: attendee.lastName ?? "",
         linkedShow: showID,
+        source: AttendeeSource.import,
       }));
 
       await insertMultipleAttendees(formattedData);
