@@ -33,12 +33,17 @@ export const attendees = pgTable("attendee", {
   firstName: text("first_name").notNull(),
   lastName: text("last_name").notNull(),
   email: text("email").notNull(),
-  linkedShow: serial("linked_show")
-    .notNull()
-    .references(() => shows.id),
+  phoneNumber: text("phone_number"),
+  linkedShow: serial("linked_show").references(() => shows.id),
+  source: integer("source").notNull(),
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
 });
 
 export type Attendee = typeof attendees.$inferSelect;
 export type NewAttendee = typeof attendees.$inferInsert;
+export enum AttendeeSource {
+  manual = 0,
+  import = 1,
+  experience = 2,
+}

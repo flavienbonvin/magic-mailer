@@ -1,5 +1,6 @@
 "use client";
 
+import RequiredField from "@/components/atoms/required-field";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -12,6 +13,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { insertExperienceAttendee } from "@/data/actions/attendees";
+import { AttendeeSource } from "@/data/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -36,8 +39,12 @@ const ExperienceForm = () => {
     },
   });
 
-  const onSubmit = (data: FormSchema) => {
-    console.log(data);
+  const onSubmit = async (data: FormSchema) => {
+    await insertExperienceAttendee({
+      ...data,
+      source: AttendeeSource.experience,
+      linkedShow: 1, //TODO fix this and find solution for manual input
+    });
   };
 
   return (
@@ -58,7 +65,9 @@ const ExperienceForm = () => {
               name="firstName"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Prénom</FormLabel>
+                  <FormLabel>
+                    Prénom <RequiredField />
+                  </FormLabel>
                   <FormControl>
                     <Input {...field} />
                   </FormControl>
@@ -71,7 +80,9 @@ const ExperienceForm = () => {
               name="lastName"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Nom de famille</FormLabel>
+                  <FormLabel>
+                    Nom de famille <RequiredField />
+                  </FormLabel>
                   <FormControl>
                     <Input {...field} />
                   </FormControl>
@@ -84,7 +95,9 @@ const ExperienceForm = () => {
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Addresse email</FormLabel>
+                  <FormLabel>
+                    Addresse email <RequiredField />
+                  </FormLabel>
                   <FormControl>
                     <Input {...field} />
                   </FormControl>

@@ -3,12 +3,18 @@
 import { PAGES } from "@/constants";
 import { and, eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 import { db } from "../db";
 import { NewAttendee, attendees } from "../schema";
 
 export const insertAttendee = async (data: NewAttendee) => {
   await db.insert(attendees).values(data);
   revalidatePath(PAGES.SIMPLE_STEP1);
+};
+
+export const insertExperienceAttendee = async (data: NewAttendee) => {
+  await db.insert(attendees).values(data);
+  redirect(PAGES.EXPERIENCE_SUCCESS);
 };
 
 export const insertMultipleAttendees = async (data: NewAttendee[]) => {

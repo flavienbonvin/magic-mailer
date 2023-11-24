@@ -1,5 +1,6 @@
 "use client";
 
+import RequiredField from "@/components/atoms/required-field";
 import { Button } from "@/components/ui/button";
 import DatePicker from "@/components/ui/date-picker";
 import {
@@ -62,7 +63,9 @@ const CreateEditShowForm = ({ show, setOpen }: CreateShowFormProps) => {
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Nom de la représentation ou du lieu</FormLabel>
+              <FormLabel>
+                Nom de la représentation ou du lieu <RequiredField />
+              </FormLabel>
               <FormControl>
                 <Input {...field} />
               </FormControl>
@@ -75,7 +78,9 @@ const CreateEditShowForm = ({ show, setOpen }: CreateShowFormProps) => {
           name="date"
           render={() => (
             <FormItem>
-              <FormLabel className="block">Date de la représentation</FormLabel>
+              <FormLabel className="block">
+                Date de la représentation <RequiredField />
+              </FormLabel>
               <FormControl>
                 <DatePicker
                   date={form.getValues("date")}

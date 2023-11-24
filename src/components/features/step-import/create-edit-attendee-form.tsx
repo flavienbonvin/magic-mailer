@@ -1,5 +1,6 @@
 "use client";
 
+import RequiredField from "@/components/atoms/required-field";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -11,7 +12,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { insertAttendee, isEmailAlreadyRegistered, updateAttendee } from "@/data/actions/attendees";
-import { Attendee } from "@/data/schema";
+import { Attendee, AttendeeSource } from "@/data/schema";
 import { toastSaveAttendee } from "@/lib/toaster";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useSearchParams } from "next/navigation";
@@ -50,7 +51,7 @@ const CreateEditAttendeeForm = ({ attendee, setOpen }: CreateEditAttendeeFormPro
     }
 
     if (attendee && attendee.id) {
-      await updateAttendee(attendee.id, data);
+      await updateAttendee(attendee.id, { ...data, source: attendee.source });
     } else {
       const isPresent = await isEmailAlreadyRegistered(data.email, +showID);
       if (isPresent) {
@@ -61,7 +62,7 @@ const CreateEditAttendeeForm = ({ attendee, setOpen }: CreateEditAttendeeFormPro
         return;
       }
 
-      await insertAttendee({ ...data, linkedShow: +showID });
+      await insertAttendee({ ...data, linkedShow: +showID, source: AttendeeSource.manual });
     }
 
     toastSaveAttendee();
@@ -76,7 +77,9 @@ const CreateEditAttendeeForm = ({ attendee, setOpen }: CreateEditAttendeeFormPro
           name="firstName"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Prénom</FormLabel>
+              <FormLabel>
+                Prénom <RequiredField />
+              </FormLabel>
               <FormControl>
                 <Input {...field} />
               </FormControl>
@@ -89,7 +92,9 @@ const CreateEditAttendeeForm = ({ attendee, setOpen }: CreateEditAttendeeFormPro
           name="lastName"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Nom de famille</FormLabel>
+              <FormLabel>
+                Nom de famille <RequiredField />
+              </FormLabel>
               <FormControl>
                 <Input {...field} />
               </FormControl>
@@ -102,7 +107,9 @@ const CreateEditAttendeeForm = ({ attendee, setOpen }: CreateEditAttendeeFormPro
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Addresse email</FormLabel>
+              <FormLabel>
+                Addresse email <RequiredField />
+              </FormLabel>
               <FormControl>
                 <Input {...field} />
               </FormControl>
