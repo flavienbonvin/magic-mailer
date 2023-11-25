@@ -10,7 +10,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
       <Header />
-      <main className="container mb-20 flex pt-10">{children}</main>
+      <main className="container mb-20 flex flex-col pt-10">{children}</main>
     </>
   );
 }
