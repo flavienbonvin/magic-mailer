@@ -1,10 +1,8 @@
-import AttendeeListAll from "@/components/features/attendee-list/attendee-list-all";
-import AttendeeListExperience from "@/components/features/attendee-list/attendee-list-experience";
-import AttendeeListImported from "@/components/features/attendee-list/attendee-list-imported";
-import AttendeeListManual from "@/components/features/attendee-list/attendee-list-manual";
+import AttendeeListWrapper from "@/components/features/attendee-list/attendee-list-wrapper";
 import TabTrigger from "@/components/features/attendee-list/tab-trigger";
 import H1 from "@/components/typography/h1";
 import { Tabs, TabsContent, TabsList } from "@/components/ui/tabs";
+import { AttendeeSource } from "@/data/schema";
 import { Suspense } from "react";
 
 export default async function Page({ searchParams }: { searchParams: { tab?: string } }) {
@@ -22,22 +20,22 @@ export default async function Page({ searchParams }: { searchParams: { tab?: str
         </TabsList>
         <TabsContent value="all">
           <Suspense fallback={<p>loading</p>}>
-            <AttendeeListAll />
+            <AttendeeListWrapper allAttendees />
           </Suspense>
         </TabsContent>
         <TabsContent value="experience">
           <Suspense fallback={<p>loading</p>}>
-            <AttendeeListExperience />
+            <AttendeeListWrapper source={AttendeeSource.experience} />
           </Suspense>
         </TabsContent>
         <TabsContent value="imported">
           <Suspense fallback={<p>loading</p>}>
-            <AttendeeListImported />
+            <AttendeeListWrapper source={AttendeeSource.import} />
           </Suspense>
         </TabsContent>
         <TabsContent value="manuals">
           <Suspense fallback={<p>loading</p>}>
-            <AttendeeListManual />
+            <AttendeeListWrapper source={AttendeeSource.manual} />
           </Suspense>
         </TabsContent>
       </Tabs>

@@ -57,7 +57,7 @@ export const getAttendeesForShow = (showId: number) => {
     .where(eq(attendees.linkedShow, showId));
 };
 
-const getAttdeneesBySource = (source: AttendeeSource) => {
+export const getAttdeneesBySource = (source: AttendeeSource) => {
   return db
     .select({
       id: attendees.id,
@@ -68,18 +68,6 @@ const getAttdeneesBySource = (source: AttendeeSource) => {
     })
     .from(attendees)
     .where(eq(attendees.source, source));
-};
-
-export const getImportedAttendees = () => {
-  return getAttdeneesBySource(AttendeeSource.import);
-};
-
-export const getExperienceAttendees = async () => {
-  return getAttdeneesBySource(AttendeeSource.experience);
-};
-
-export const getManualAttendees = () => {
-  return getAttdeneesBySource(AttendeeSource.manual);
 };
 
 export const getAllAttendees = () => {
