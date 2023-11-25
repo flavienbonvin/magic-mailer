@@ -5,7 +5,7 @@ import { and, eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { db } from "../db";
-import { NewAttendee, attendees } from "../schema";
+import { AttendeeSource, NewAttendee, attendees } from "../schema";
 
 export const insertAttendee = async (data: NewAttendee) => {
   await db.insert(attendees).values(data);
@@ -55,4 +55,41 @@ export const getAttendeesForShow = (showId: number) => {
     })
     .from(attendees)
     .where(eq(attendees.linkedShow, showId));
+};
+
+const getAttdeneesBySource = (source: AttendeeSource) => {
+  return db
+    .select({
+      id: attendees.id,
+      email: attendees.email,
+      firstName: attendees.firstName,
+      lastName: attendees.lastName,
+      source: attendees.source,
+    })
+    .from(attendees)
+    .where(eq(attendees.source, source));
+};
+
+export const getImportedAttendees = () => {
+  return getAttdeneesBySource(AttendeeSource.import);
+};
+
+export const getExperienceAttendees = async () => {
+  return getAttdeneesBySource(AttendeeSource.experience);
+};
+
+export const getManualAttendees = () => {
+  return getAttdeneesBySource(AttendeeSource.manual);
+};
+
+export const getAllAttendees = () => {
+  return db
+    .select({
+      id: attendees.id,
+      email: attendees.email,
+      firstName: attendees.firstName,
+      lastName: attendees.lastName,
+      source: attendees.source,
+    })
+    .from(attendees);
 };

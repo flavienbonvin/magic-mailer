@@ -13,4 +13,5 @@ export const PAGES = {
   ADMIN: "/admin",
   EXPERIENCE: "/experience",
   EXPERIENCE_SUCCESS: "/experience/success",
+  ATTENDEE_LIST: "/attendee-list",
 };

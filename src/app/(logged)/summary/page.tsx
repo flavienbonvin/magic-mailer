@@ -1,3 +1,4 @@
+import H1 from "@/components/typography/h1";
 import StatCard from "@/components/ui/stats-card";
 import Image from "next/image";
 
@@ -9,7 +10,7 @@ export default function Page() {
   return (
     <div className="flex flex-col gap-12">
       <div>
-        <h1 className="mb-3 text-xl font-medium first:mt-0">Résumé de la représentation</h1>
+        <H1>Résumé de la représentation</H1>
         <h2 className="text-3xl font-semibold tracking-tight first:mt-0">Opéra de Lausanne</h2>
       </div>
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">

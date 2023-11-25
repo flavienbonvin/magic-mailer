@@ -1,5 +1,6 @@
 import AddAdminForm from "@/components/features/admin/add-admin-form";
 import AdminAction from "@/components/features/admin/admin-actions";
+import H1 from "@/components/typography/h1";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import {
   Table,
@@ -22,7 +23,7 @@ export default async function Page() {
 
   return (
     <div className="w-screen">
-      <h1 className="mb-3 text-xl font-medium first:mt-0">Gestion des accès</h1>
+      <H1>Gestion des accès</H1>
       {data.length === 0 && (
         <div className="flex flex-col gap-6">
           <p className="text-gray-500">Aucun utilisateur n&apos;a été ajouté pour le moment.</p>
