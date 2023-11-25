@@ -14,6 +14,11 @@ const TabsTrigger = ({ value, title }: TabsTrigger) => {
   }>();
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (value === "all") {
+      setQueryParams({ tab: undefined });
+      return;
+    }
+
     if (e.target instanceof HTMLButtonElement) {
       const value = e.target.dataset.value;
       if (value) {

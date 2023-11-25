@@ -1,13 +1,19 @@
 import EmptyState from "@/components/containers/empty-state";
-import { Attendee } from "@/data/schema";
+import { getAllAttendees, getAttdeneesBySource } from "@/data/actions/attendees";
+import { Attendee, AttendeeSource } from "@/data/schema";
 import AttendeeListTable from "./attendee-list-table";
 
 interface AttendeeListWrapperProps {
-  attendees?: Attendee[];
+  source?: AttendeeSource;
   allAttendees?: boolean;
 }
 
-const AttendeeListWrapper = ({ attendees, allAttendees }: AttendeeListWrapperProps) => {
+const AttendeeListWrapper = async ({ source, allAttendees }: AttendeeListWrapperProps) => {
+  const attendees =
+    allAttendees || !source
+      ? ((await getAllAttendees()) as Attendee[])
+      : ((await getAttdeneesBySource(source)) as Attendee[]);
+
   return (
     <>
       {attendees && attendees.length === 0 && <EmptyState message="Aucun spectateur à voir" />}
