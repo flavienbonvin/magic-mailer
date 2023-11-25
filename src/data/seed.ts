@@ -1,5 +1,5 @@
 import { db } from "./db";
-import { ShowStatus, attendees, shows, users } from "./schema";
+import { AttendeeSource, ShowStatus, attendees, shows, users } from "./schema";
 
 const seedDatabase = async () => {
   console.log("Seeding database");
@@ -22,6 +22,7 @@ const seedDatabase = async () => {
     lastName: "Doe",
     email: process.env.ADMIN_EMAIL!,
     linkedShow: show[0].id,
+    source: AttendeeSource.manual,
   });
 
   console.log("Database seeded");
