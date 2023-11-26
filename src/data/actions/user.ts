@@ -12,16 +12,17 @@ export const getAllUsers = async () => {
 
 export const getUser = async (email?: string) => {
   if (!email) return null;
-  return await db
-    .select()
-    .from(users)
-    .where(eq(users.email, email))
-    .limit(1)
-    .then((res) => (res ? res[0] : null));
+  return db.query.users.findFirst({
+    where: eq(users.email, email),
+  });
 };
 
 export const getAllowedEmails = async () => {
-  return await db.select({ email: users.email }).from(users);
+  return await db.query.users.findMany({
+    columns: {
+      email: true,
+    },
+  });
 };
 
 export const toggleAdmin = async (id: number, isAdmin: boolean) => {

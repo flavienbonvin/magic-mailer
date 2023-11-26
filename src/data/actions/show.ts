@@ -11,19 +11,17 @@ export const getAllShows = async () => {
 };
 
 export const getAllIncomingShow = async () => {
-  return await db
-    .select()
-    .from(shows)
-    .where(eq(shows.status, ShowStatus.incoming))
-    .orderBy(shows.date);
+  return db.query.shows.findMany({
+    where: eq(shows.status, ShowStatus.incoming),
+    orderBy: shows.date,
+  });
 };
 
 export const getAllFinishedShow = async () => {
-  return await db
-    .select()
-    .from(shows)
-    .where(eq(shows.status, ShowStatus.finished))
-    .orderBy(shows.date);
+  return db.query.shows.findMany({
+    where: eq(shows.status, ShowStatus.finished),
+    orderBy: shows.date,
+  });
 };
 
 export const insertShow = async (show: NewShow) => {

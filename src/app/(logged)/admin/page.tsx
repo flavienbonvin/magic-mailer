@@ -10,7 +10,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { getAllUsers } from "@/data/actions/user";
+import { getAllUsers, getUser } from "@/data/actions/user";
+import { getCookie } from "@/data/helpers/cookie";
+import { notFound } from "next/navigation";
 
 interface Data {
   id: string;
@@ -19,6 +21,13 @@ interface Data {
 }
 
 export default async function Page() {
+  const cookie = getCookie();
+  const user = await getUser(cookie?.value);
+
+  if (!user?.isAdmin) {
+    return notFound();
+  }
+
   const data = await getAllUsers();
 
   return (
