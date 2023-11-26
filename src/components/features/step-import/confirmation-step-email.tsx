@@ -15,12 +15,16 @@ import { Button } from "@/components/ui/button";
 import { PAGES } from "@/constants";
 import { useRouter } from "next/navigation";
 
-const ConfirmationStepEmail = () => {
+interface ConfirmationStepEmailProps {
+  showID: number;
+}
+
+const ConfirmationStepEmail = ({ showID }: ConfirmationStepEmailProps) => {
   const router = useRouter();
 
   const handleContinue = () => {
     console.log("Continue");
-    router.push(PAGES.STEP2);
+    router.push(PAGES.STEP2(showID));
   };
 
   return (

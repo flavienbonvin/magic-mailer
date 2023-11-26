@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { AUTH_COOKIE, PAGES } from "./constants";
-import { getUser } from "./data/actions/user";
-import { getCookie, hasValidCookie } from "./data/helpers/cookie";
+import { hasValidCookie } from "./data/helpers/cookie";
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -24,12 +23,6 @@ export async function middleware(request: NextRequest) {
 
   if (pathname !== PAGES.LOGIN && !validCookie) {
     return NextResponse.redirect(new URL(PAGES.LOGIN, request.url));
-  }
-
-  const cookie = getCookie();
-  const user = await getUser(cookie?.value);
-  if (pathname === PAGES.ADMIN && validCookie && !user?.isAdmin) {
-    return NextResponse.redirect(new URL(PAGES.DASHBOARD, request.url));
   }
 
   return NextResponse.next();

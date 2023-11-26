@@ -2,8 +2,14 @@ import ConfirmationStepPicture from "@/components/features/step-image/confirmati
 import UploadPicutre from "@/components/features/step-image/upload-picture";
 import StepHeader from "@/components/features/step/step-header";
 import StepTitle from "@/components/features/step/step-title";
+import { notFound } from "next/navigation";
 
-export default function Page() {
+export default function Page({ searchParams }: { searchParams: { [key: string]: string } }) {
+  const { showID } = searchParams;
+  if (!showID || isNaN(+showID)) {
+    notFound();
+  }
+
   return (
     <div className="flex w-full flex-col gap-4">
       <StepTitle stepNumber={2}>

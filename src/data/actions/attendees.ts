@@ -46,38 +46,39 @@ export const isEmailAlreadyRegistered = async (email: string, showID: number) =>
 };
 
 export const getAttendeesForShow = (showId: number) => {
-  return db
-    .select({
-      id: attendees.id,
-      email: attendees.email,
-      firstName: attendees.firstName,
-      lastName: attendees.lastName,
-    })
-    .from(attendees)
-    .where(eq(attendees.linkedShow, showId));
+  return db.query.attendees.findMany({
+    where: eq(attendees.linkedShow, showId),
+    columns: {
+      id: true,
+      firstName: true,
+      lastName: true,
+      email: true,
+      source: true,
+    },
+  });
 };
 
 export const getAttdeneesBySource = (source: AttendeeSource) => {
-  return db
-    .select({
-      id: attendees.id,
-      email: attendees.email,
-      firstName: attendees.firstName,
-      lastName: attendees.lastName,
-      source: attendees.source,
-    })
-    .from(attendees)
-    .where(eq(attendees.source, source));
+  return db.query.attendees.findMany({
+    where: eq(attendees.source, source),
+    columns: {
+      id: true,
+      firstName: true,
+      lastName: true,
+      email: true,
+      source: true,
+    },
+  });
 };
 
 export const getAllAttendees = () => {
-  return db
-    .select({
-      id: attendees.id,
-      email: attendees.email,
-      firstName: attendees.firstName,
-      lastName: attendees.lastName,
-      source: attendees.source,
-    })
-    .from(attendees);
+  return db.query.attendees.findMany({
+    columns: {
+      id: true,
+      firstName: true,
+      lastName: true,
+      email: true,
+      source: true,
+    },
+  });
 };
