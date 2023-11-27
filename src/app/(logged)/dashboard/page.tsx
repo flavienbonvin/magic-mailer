@@ -10,10 +10,12 @@ import { Suspense } from "react";
 export default function Home() {
   return (
     <div className="flex w-full flex-col gap-10">
-      <div className="flex justify-end gap-6">
+      <div className="flex flex-col gap-6 sm:flex-row sm:justify-end">
         <CreateEditShowModal />
         <Link href={PAGES.ATTENDEE_LIST}>
-          <Button variant="outline">Gestion des spectateurs</Button>
+          <Button variant="outline" className="w-full">
+            Gestion des spectateurs
+          </Button>
         </Link>
       </div>
       <div className="mb-20 flex flex-col gap-10">
