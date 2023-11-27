@@ -1,7 +1,7 @@
 import LoginForm from "@/components/features/home/login-form";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { PAGES } from "@/constants";
-import { hasValidCookie } from "@/data/helpers/cookie";
+import { hasValidCookie } from "@/lib/cookie";
 import { redirect } from "next/navigation";
 
 export default function Home() {

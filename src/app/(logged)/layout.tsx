@@ -1,6 +1,6 @@
 import Header from "@/components/layout/header";
 import { PAGES } from "@/constants";
-import { hasValidCookie } from "@/data/helpers/cookie";
+import { hasValidCookie } from "@/lib/cookie";
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 

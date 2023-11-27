@@ -11,7 +11,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { getAllUsers, getUser } from "@/data/actions/user";
-import { getCookie } from "@/data/helpers/cookie";
+import { getCookie } from "@/lib/cookie";
 import { notFound } from "next/navigation";
 
 interface Data {
