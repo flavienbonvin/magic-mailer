@@ -14,7 +14,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { login } from "@/data/actions/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -25,7 +25,7 @@ const formSchema = z.object({
 type FormSchema = z.infer<typeof formSchema>;
 
 const LoginForm = () => {
-  const router = useRouter();
+  const [loading, setLoading] = useState(false);
 
   const form = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
@@ -34,9 +34,10 @@ const LoginForm = () => {
     },
   });
 
-  // TODO make this a server method
   const onSubmit = async (data: FormSchema) => {
-    login(data.email);
+    setLoading(true);
+    await login(data.email);
+    setLoading(false);
   };
 
   return (
@@ -58,7 +59,9 @@ const LoginForm = () => {
           )}
         />
         <div className="flex justify-between">
-          <Button type="submit">Sauvegarder</Button>
+          <Button type="submit" disabled={loading}>
+            Sauvegarder
+          </Button>
           <ThemeSwitcher />
         </div>
       </form>
