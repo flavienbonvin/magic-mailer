@@ -1,5 +1,8 @@
 import Header from "@/components/layout/header";
+import { PAGES } from "@/constants";
+import { hasValidCookie } from "@/data/helpers/cookie";
 import type { Metadata } from "next";
+import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "Magic Mail",
@@ -7,6 +10,11 @@ export const metadata: Metadata = {
 };
 
 export default function Layout({ children }: { children: React.ReactNode }) {
+  const validCookie = hasValidCookie();
+  if (!validCookie) {
+    redirect(PAGES.LOGIN);
+  }
+
   return (
     <>
       <Header />
