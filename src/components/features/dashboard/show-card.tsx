@@ -1,8 +1,6 @@
 import { PAGES } from "@/constants";
 import { Show, ShowStatus } from "@/data/schema";
-import { cn } from "@/lib/utils";
 import Link from "next/link";
-import Muted from "../../typography/muted";
 import { Button } from "../../ui/button";
 import {
   Card,
@@ -14,19 +12,11 @@ import {
 } from "../../ui/card";
 import CreateEditShowModal from "./create-edit-show-modal";
 import DeleteShowModal from "./delete-show-modal";
+import { ShowStatusLine } from "./show-status-line";
 
 interface ShowCardProps {
   show: Show;
 }
-
-const ShowStatusLine = ({ finished }: { finished: boolean }) => {
-  return (
-    <div className="flex place-items-center gap-1">
-      <p className={cn("h-2 w-2 rounded-full", finished ? "bg-lime-500" : "bg-amber-500")} />
-      <Muted>{finished ? "Terminé" : "À venir"}</Muted>
-    </div>
-  );
-};
 
 const ShowCard = ({ show }: ShowCardProps) => {
   const finished = show.status === ShowStatus.finished;
