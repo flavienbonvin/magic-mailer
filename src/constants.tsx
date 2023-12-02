@@ -15,4 +15,5 @@ export const PAGES = {
   EXPERIENCE: "/experience",
   EXPERIENCE_SUCCESS: "/experience/success",
   ATTENDEE_LIST: "/attendee-list",
+  API_SEND_EMAIL: "/api/send-emails",
 };

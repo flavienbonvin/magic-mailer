@@ -1,9 +1,9 @@
 import Muted from "@/components/typography/muted";
-import { getAllIncomingShow } from "@/data/actions/show";
+import { getAllIncomingOrInProgressShow } from "@/data/actions/show";
 import ShowCard from "./show-card";
 
 const ShowListToCome = async () => {
-  const upcomingShow = await getAllIncomingShow();
+  const upcomingShow = await getAllIncomingOrInProgressShow();
 
   return (
     <section>

@@ -22,8 +22,13 @@ interface ConfirmationStepEmailProps {
 const ConfirmationStepEmail = ({ showID }: ConfirmationStepEmailProps) => {
   const router = useRouter();
 
-  const handleContinue = () => {
+  const handleContinue = async () => {
     console.log("Continue");
+    // todo send mail
+    await fetch(PAGES.API_SEND_EMAIL, {
+      method: "POST",
+      body: JSON.stringify({ showID }),
+    });
     router.push(PAGES.STEP2(showID));
   };
 

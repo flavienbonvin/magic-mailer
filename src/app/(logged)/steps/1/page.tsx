@@ -2,14 +2,22 @@ import AttendeeManagement from "@/components/features/step-import/attendee-manag
 import ConfirmationStepEmail from "@/components/features/step-import/confirmation-step-email";
 import StepHeader from "@/components/features/step/step-header";
 import StepTitle from "@/components/features/step/step-title";
-import { notFound } from "next/navigation";
+import { PAGES } from "@/constants";
+import { getShowById } from "@/data/actions/show";
+import { ShowStatus } from "@/data/schema";
+import { notFound, redirect } from "next/navigation";
 import { Suspense } from "react";
 
 // TODO add skeleton
-export default function Page({ searchParams }: { searchParams: { [key: string]: string } }) {
+export default async function Page({ searchParams }: { searchParams: { [key: string]: string } }) {
   const { showID } = searchParams;
   if (!showID || isNaN(+showID)) {
     notFound();
+  }
+
+  const show = await getShowById(+showID);
+  if (show && show.status === ShowStatus.emailSent) {
+    redirect(PAGES.STEP2(show.id));
   }
 
   return (
