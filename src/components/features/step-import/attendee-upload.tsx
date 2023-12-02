@@ -14,7 +14,7 @@ interface AttendeeManagementProps {
   disableDeleAll: boolean;
 }
 
-const AttendeeUpload = async ({ showID, disableDeleAll }: AttendeeManagementProps) => {
+const AttendeeUpload = ({ showID, disableDeleAll }: AttendeeManagementProps) => {
   const handleNewFile = (file: File) => {
     parseFileToAttendees(file, async (data: CSVAttendee[]) => {
       const formattedData: NewAttendee[] = data.map((attendee) => ({
