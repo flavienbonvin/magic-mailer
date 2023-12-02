@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { insertShow, updateShow } from "@/data/actions/show";
-import { Show, ShowStatus } from "@/data/schema";
+import { NewShow, Show, ShowStatus } from "@/data/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -40,8 +40,10 @@ const CreateEditShowForm = ({ show, setOpen }: CreateShowFormProps) => {
   });
 
   const onSubmit = async (data: FormSchema) => {
-    const showData = {
+    const showData: NewShow = {
       ...data,
+      image1Name: crypto.randomUUID(),
+      image2Name: crypto.randomUUID(),
       status: ShowStatus.incoming,
     };
 

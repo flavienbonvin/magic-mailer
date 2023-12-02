@@ -24,6 +24,12 @@ export const getAllFinishedShow = async () => {
   });
 };
 
+export const getShowById = async (id: number) => {
+  return await db.query.shows.findFirst({
+    where: eq(shows.id, id),
+  });
+};
+
 export const insertShow = async (show: NewShow) => {
   await db.insert(shows).values(show);
   revalidatePath(PAGES.DASHBOARD);

@@ -1,4 +1,4 @@
-import { boolean, integer, pgTable, serial, text, timestamp } from "drizzle-orm/pg-core";
+import { boolean, integer, pgTable, serial, text, timestamp, uuid } from "drizzle-orm/pg-core";
 
 export const users = pgTable("user", {
   id: serial("id").primaryKey(),
@@ -16,6 +16,8 @@ export const shows = pgTable("show", {
   name: text("name").notNull(),
   date: timestamp("date").notNull(),
   status: integer("status").notNull(),
+  image1Name: uuid("image1_name").notNull(),
+  image2Name: uuid("image2_name").notNull(),
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
 });
