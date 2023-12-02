@@ -30,7 +30,7 @@ const CreateEditShowModal = ({ show }: CreateShowModalProps) => {
             <Pen size={16} />
           </Button>
         ) : (
-          <Button className="place-self-end">
+          <Button>
             <Plus size={16} className="mr-2" />
             Créer une représentation
           </Button>

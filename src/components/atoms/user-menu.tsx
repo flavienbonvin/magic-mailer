@@ -1,6 +1,6 @@
 import { PAGES } from "@/constants";
 import { getUser } from "@/data/actions/user";
-import { getCookie } from "@/data/helpers/cookie";
+import { getCookie } from "@/lib/cookie";
 import { MenuIcon } from "lucide-react";
 import Link from "next/link";
 import { Button } from "../ui/button";

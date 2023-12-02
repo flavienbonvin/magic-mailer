@@ -2,7 +2,7 @@
 
 import { PAGES } from "@/constants";
 import { redirect } from "next/navigation";
-import { createCookie } from "../helpers/cookie";
+import { createCookie } from "../../lib/cookie";
 import { getAllowedEmails } from "./user";
 
 export async function login(email: string) {

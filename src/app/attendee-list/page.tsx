@@ -5,7 +5,7 @@ import { Tabs, TabsContent, TabsList } from "@/components/ui/tabs";
 import { AttendeeSource } from "@/data/schema";
 import { Suspense } from "react";
 
-export default async function Page({ searchParams }: { searchParams: { tab?: string } }) {
+export default function Page({ searchParams }: { searchParams: { tab?: string } }) {
   const tab = searchParams.tab || "all";
 
   return (
