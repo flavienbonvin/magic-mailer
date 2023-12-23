@@ -2,12 +2,19 @@
 
 import { Button } from "@/components/ui/button";
 import DropZone from "@/components/ui/drop-zone";
+import { uploadFile } from "@/data/supabase";
 import { FileImage, Trash } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
-const UploadPicutre = () => {
+interface UploadPicutreProps {
+  pictureName: string;
+}
+
+const UploadPicture = ({ pictureName }: UploadPicutreProps) => {
   const [selectedFile, setSelectedFile] = useState<File | undefined>();
+  const [hadError, setHadError] = useState(false);
+  const [uploading, setUploading] = useState(false);
   const [preview, setPreview] = useState("");
 
   useEffect(() => {
@@ -22,8 +29,20 @@ const UploadPicutre = () => {
     return () => URL.revokeObjectURL(objectUrl);
   }, [selectedFile]);
 
-  const handleFileChange = (file: File) => {
+  const handleFileChange = async (file: File) => {
     setSelectedFile(file);
+    setUploading(true);
+
+    const response = await uploadFile(file, pictureName);
+    if (!response) {
+      setHadError(true);
+    }
+    setUploading(false);
+  };
+
+  const reset = () => {
+    setHadError(false);
+    setSelectedFile(undefined);
   };
 
   return (
@@ -33,15 +52,29 @@ const UploadPicutre = () => {
           <div className="relative mx-auto h-[500px] w-full sm:w-96">
             <Image src={preview} alt="" className="rounded" fill objectFit="contain" />
           </div>
-          <Button
-            size="sm"
-            className="w-full sm:w-64"
-            variant="outline"
-            onClick={() => setPreview("")}
-          >
-            <Trash size={16} className="mr-2" />
-            Changer l&apos;image
-          </Button>
+          {hadError ? (
+            <Button
+              size="sm"
+              className="w-full sm:w-64"
+              variant="destructive"
+              onClick={reset}
+              disabled={uploading}
+            >
+              <Trash size={16} className="mr-2" />
+              Recommencer
+            </Button>
+          ) : (
+            <Button
+              size="sm"
+              className="w-full sm:w-64"
+              variant="outline"
+              onClick={reset}
+              disabled={uploading}
+            >
+              <Trash size={16} className="mr-2" />
+              Changer l&apos;image
+            </Button>
+          )}
         </div>
       ) : (
         <DropZone
@@ -56,4 +89,4 @@ const UploadPicutre = () => {
   );
 };
 
-export default UploadPicutre;
+export default UploadPicture;

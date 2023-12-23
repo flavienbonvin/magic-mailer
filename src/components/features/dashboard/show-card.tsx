@@ -1,7 +1,4 @@
-import { PAGES } from "@/constants";
 import { Show, ShowStatus } from "@/data/schema";
-import Link from "next/link";
-import { Button } from "../../ui/button";
 import {
   Card,
   CardContent,
@@ -12,6 +9,7 @@ import {
 } from "../../ui/card";
 import CreateEditShowModal from "./create-edit-show-modal";
 import DeleteShowModal from "./delete-show-modal";
+import { ShowCardButton } from "./show-card-button";
 import { ShowStatusLine } from "./show-status-line";
 
 interface ShowCardProps {
@@ -19,8 +17,6 @@ interface ShowCardProps {
 }
 
 const ShowCard = ({ show }: ShowCardProps) => {
-  const finished = show.status === ShowStatus.finished;
-
   return (
     <Card>
       <CardHeader>
@@ -28,17 +24,11 @@ const ShowCard = ({ show }: ShowCardProps) => {
         <CardDescription>{show.date.toDateString()}</CardDescription>
       </CardHeader>
       <CardContent>
-        <ShowStatusLine finished={show.status === ShowStatus.finished} />
+        <ShowStatusLine status={show.status} />
       </CardContent>
       <CardFooter className="flex justify-between">
-        <Button size="sm" variant="outline" asChild>
-          {finished ? (
-            <Link href={PAGES.SUMMARY}>Résumé</Link>
-          ) : (
-            <Link href={PAGES.STEP1(show.id)}>Commencer</Link>
-          )}
-        </Button>
-        {show.status === ShowStatus.incoming && (
+        <ShowCardButton show={show} />
+        {show.status !== ShowStatus.finished && (
           <div>
             <CreateEditShowModal show={show} />
             <DeleteShowModal show={show} />

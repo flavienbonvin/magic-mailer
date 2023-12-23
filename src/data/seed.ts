@@ -14,6 +14,8 @@ const seedDatabase = async () => {
       name: "The Mandalorian",
       date: new Date(),
       status: ShowStatus.incoming,
+      image1Name: crypto.randomUUID(),
+      image2Name: crypto.randomUUID(),
     })
     .returning({ id: shows.id });
 

@@ -8,15 +8,18 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
+import { ShowStatus } from "@/data/schema";
 import { Pen, Trash } from "lucide-react";
 import { ShowStatusLine } from "./show-status-line";
 
 interface ShowListLoaderProps {
   title: string;
-  finished?: boolean;
+  status?: ShowStatus;
 }
 
-const ShowListLoader = ({ title, finished = false }: ShowListLoaderProps) => {
+const ShowListLoader = ({ title, status = ShowStatus.incoming }: ShowListLoaderProps) => {
+  const finished = status === ShowStatus.finished;
+
   return (
     <section>
       <h2 className="mb-4 text-2xl font-semibold tracking-tight first:mt-0">{title}</h2>
@@ -31,11 +34,11 @@ const ShowListLoader = ({ title, finished = false }: ShowListLoaderProps) => {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <ShowStatusLine finished={finished} />
+            <ShowStatusLine status={status} />
           </CardContent>
           <CardFooter className="flex justify-between">
             <Button size="sm" variant="outline" disabled>
-              {finished ? "Résumé" : "Commencer"}
+              {finished ? "Résumé" : "Ajouter participants"}
             </Button>
             {!finished && (
               <div>

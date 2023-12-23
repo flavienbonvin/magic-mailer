@@ -4,6 +4,7 @@ import ShowListFinished from "@/components/features/dashboard/shows-list-finishe
 import ShowListToCome from "@/components/features/dashboard/shows-list-to-come";
 import { Button } from "@/components/ui/button";
 import { PAGES } from "@/constants";
+import { ShowStatus } from "@/data/schema";
 import Link from "next/link";
 import { Suspense } from "react";
 
@@ -22,7 +23,11 @@ export default function Home() {
         <Suspense fallback={<ShowListLoader title="Représentation à venir" />}>
           <ShowListToCome />
         </Suspense>
-        <Suspense fallback={<ShowListLoader finished title="Représentation terminées" />}>
+        <Suspense
+          fallback={
+            <ShowListLoader status={ShowStatus.finished} title="Représentation terminées" />
+          }
+        >
           <ShowListFinished />
         </Suspense>
       </div>
