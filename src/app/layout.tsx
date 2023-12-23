@@ -1,8 +1,8 @@
+import { Toaster } from "@/components/ui/sonner";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
 import { Inter } from "next/font/google";
-import { Toaster } from "sonner";
 import "./globals.css";
 
 const ThemeProvider = dynamic(() => import("../components/containers/theme-provider"), {
