@@ -13,13 +13,21 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { PAGES } from "@/constants";
+import { ShowStatus } from "@/data/schema";
 import { useRouter } from "next/navigation";
 
-const ConfirmationStepPicture = () => {
+interface ConfirmationStepPictureProps {
+  showID: number;
+}
+
+const ConfirmationStepPicture = ({ showID }: ConfirmationStepPictureProps) => {
   const router = useRouter();
 
-  const handleContinue = () => {
-    console.log("Continue");
+  const handleContinue = async () => {
+    await fetch(PAGES.API_UPDATE_SHOW, {
+      method: "POST",
+      body: JSON.stringify({ showID, status: ShowStatus.finished }),
+    });
     router.push(PAGES.SUMMARY);
   };
 

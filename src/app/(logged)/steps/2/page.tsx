@@ -15,7 +15,7 @@ export default function Page({ searchParams }: { searchParams: { [key: string]: 
   return (
     <div className="flex w-full flex-col gap-4">
       <StepTitle stepNumber={2}>
-        <ConfirmationStepPicture />
+        <ConfirmationStepPicture showID={+showID} />
       </StepTitle>
       <StepHeader
         stepDescription="Deuxième étape, envoi de l'image contenant les prediction"
