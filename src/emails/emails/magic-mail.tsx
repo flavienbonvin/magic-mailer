@@ -35,14 +35,14 @@ export const MagicMail = ({ attendeeName, image1, image2 }: MagicMailProps) => {
           <Container className="mx-auto my-10 w-[465px] rounded border border-solid border-gray-200 p-5">
             <Section>
               <Heading className="mx-0 my-8 p-0 text-center text-2xl font-normal text-black">
-                Merci d'avoir participé à l'extraordinaire Expérience!
+                Merci d&apos;avoir participé à l&apos;extraordinaire Expérience!
               </Heading>
               <Text className="text-sm leading-6 text-black">
                 {attendeeName ? `Bonsoir ${attendeeName},` : "Bonsoir,"}
               </Text>
               <Text className="text-sm leading-6 text-black">
-                Nous tenons à vous exprimer notre profonde gratitude d'avoir choisi de partager ce
-                moment magique avec nous ce soir.
+                Nous tenons à vous exprimer notre profonde gratitude d&apos;avoir choisi de partager
+                ce moment magique avec nous ce soir.
               </Text>
             </Section>
             <Section className="mt-8">
@@ -50,10 +50,10 @@ export const MagicMail = ({ attendeeName, image1, image2 }: MagicMailProps) => {
             </Section>
             <Section className="my-8">
               <Text className="text-sm leading-6 text-black">
-                Comme les mystères se dévoilent et que les écrans s'animent, vous serez émerveillés
-                par les prédictions incroyables de Marco. Chaque instant capturé est bien plus
-                qu'une simple coïncidence. C'est l'essence même de la magie, tissée dans chaque
-                prédiction.
+                Comme les mystères se dévoilent et que les écrans s&apos;animent, vous serez
+                émerveillés par les prédictions incroyables de Marco. Chaque instant capturé est
+                bien plus qu&apos;une simple coïncidence. C&apos;est l&apos;essence même de la
+                magie, tissée dans chaque prédiction.
               </Text>
             </Section>
             <Section>
@@ -61,8 +61,8 @@ export const MagicMail = ({ attendeeName, image1, image2 }: MagicMailProps) => {
             </Section>
             <Hr className="mx-0 my-7 w-full border border-solid border-gray-200" />
             <Text className="text-center text-xs leading-6 text-gray-400">
-              Restez connectés avec l'univers fascinant de Marco en explorant davantage sur son site
-              web et en le suivant sur les réseaux sociaux :
+              Restez connectés avec l&apos;univers fascinant de Marco en explorant davantage sur son
+              site web et en le suivant sur les réseaux sociaux :
             </Text>
             <Row className="text-center text-gray-400">
               <Column>
