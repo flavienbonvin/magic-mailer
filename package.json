@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "pretty": "prettier --write .",
+    "dev:mail": "cd src/emails && bun run dev",
     "db:migrate": "drizzle-kit push:pg",
     "db:seed": "bun run ./src/data/seed.ts"
   },

@@ -4,10 +4,16 @@
   "private": true,
   "scripts": {
     "dev": "email dev -p 3001",
-    "export": "email export"
+    "export": "email export",
+    "pretty": "prettier --write ."
   },
   "dependencies": {
     "@react-email/components": "0.0.11",
+    "lucide-react": "^0.300.0",
     "react-email": "1.9.5"
+  },
+  "devDependencies": {
+    "prettier": "^3.1.1",
+    "prettier-plugin-tailwindcss": "^0.5.9"
   }
 }
