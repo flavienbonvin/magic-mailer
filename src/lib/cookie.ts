@@ -7,7 +7,7 @@ const getCookiesOptions = (email: string) => ({
   name: AUTH_COOKIE,
   maxAge: AUTH_COOKIE_MAX_AGE,
   value: email,
-  secure: true,
+  httpOnly: true,
   path: "/",
 });
 
