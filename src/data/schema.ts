@@ -1,4 +1,13 @@
-import { boolean, integer, pgTable, serial, text, timestamp, uuid } from "drizzle-orm/pg-core";
+import {
+  boolean,
+  date,
+  integer,
+  pgTable,
+  serial,
+  text,
+  timestamp,
+  uuid,
+} from "drizzle-orm/pg-core";
 
 export const users = pgTable("user", {
   id: serial("id").primaryKey(),
@@ -14,7 +23,7 @@ export type NewUser = typeof users.$inferInsert;
 export const shows = pgTable("show", {
   id: serial("id").primaryKey(),
   name: text("name").notNull(),
-  date: timestamp("date").notNull(),
+  date: date("date").notNull(),
   status: integer("status").notNull(),
   image1Name: uuid("image1_name").notNull(),
   image2Name: uuid("image2_name").notNull(),

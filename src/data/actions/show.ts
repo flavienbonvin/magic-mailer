@@ -30,6 +30,17 @@ export const getShowById = async (id: number) => {
   });
 };
 
+export const getTodatShow = async () => {
+  return await db.query.shows.findFirst({
+    where: eq(shows.date, new Date().toISOString()),
+  });
+};
+
+export const isShowToday = async () => {
+  const show = await getTodatShow();
+  return !!show;
+};
+
 export const insertShow = async (show: NewShow) => {
   await db.insert(shows).values(show);
   revalidatePath(PAGES.DASHBOARD);

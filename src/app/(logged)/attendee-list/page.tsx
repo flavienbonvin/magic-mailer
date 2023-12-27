@@ -9,7 +9,7 @@ export default function Page({ searchParams }: { searchParams: { tab?: string } 
   const tab = searchParams.tab || "all";
 
   return (
-    <div>
+    <div className="w-full">
       <H1>Participants</H1>
       <Tabs defaultValue={tab}>
         <TabsList>
