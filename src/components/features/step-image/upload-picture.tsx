@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import DropZone from "@/components/ui/drop-zone";
 import { uploadFile } from "@/data/supabase";
+import { getImageURL } from "@/lib/image";
 import { FileImage, Trash } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -15,11 +16,10 @@ const UploadPicture = ({ pictureName }: UploadPicutreProps) => {
   const [selectedFile, setSelectedFile] = useState<File | undefined>();
   const [hadError, setHadError] = useState(false);
   const [uploading, setUploading] = useState(false);
-  const [preview, setPreview] = useState("");
+  const [preview, setPreview] = useState<string | undefined>(getImageURL(pictureName));
 
   useEffect(() => {
     if (!selectedFile) {
-      setPreview("");
       return;
     }
 
@@ -42,6 +42,7 @@ const UploadPicture = ({ pictureName }: UploadPicutreProps) => {
 
   const reset = () => {
     setHadError(false);
+    setPreview(undefined);
     setSelectedFile(undefined);
   };
 

@@ -16,4 +16,5 @@ export const PAGES = {
   EXPERIENCE_SUCCESS: "/experience/success",
   ATTENDEE_LIST: "/attendee-list",
   API_SEND_EMAIL: "/api/send-emails",
+  API_UPDATE_SHOW: "/api/update-show-status",
 };
