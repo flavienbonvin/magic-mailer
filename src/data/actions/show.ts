@@ -1,7 +1,8 @@
 "use server";
 
 import { PAGES } from "@/constants";
-import { eq, or } from "drizzle-orm";
+import { endOfToday, startOfToday } from "date-fns";
+import { and, eq, gte, lte, or } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { db } from "../db";
 import { NewShow, ShowStatus, shows } from "../schema";
@@ -28,6 +29,17 @@ export const getShowById = async (id: number) => {
   return await db.query.shows.findFirst({
     where: eq(shows.id, id),
   });
+};
+
+export const getTodatShow = async () => {
+  return await db.query.shows.findFirst({
+    where: and(gte(shows.date, startOfToday()), lte(shows.date, endOfToday())),
+  });
+};
+
+export const isShowToday = async () => {
+  const show = await getTodatShow();
+  return !!show;
 };
 
 export const insertShow = async (show: NewShow) => {
