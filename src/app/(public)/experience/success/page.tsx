@@ -3,7 +3,6 @@
 import H1 from "@/components/typography/h1";
 import confetti from "canvas-confetti";
 import { PartyPopper } from "lucide-react";
-import { useEffect } from "react";
 
 const colors = [
   ["#FF3E41", "#FF4D80"],
@@ -28,11 +27,9 @@ const triggerConfetti = (value: number) => {
 };
 
 export default function Page() {
-  useEffect(() => {
-    for (var i = 0; i < 100; i++) {
-      setTimeout(() => requestAnimationFrame(() => triggerConfetti(i)), 10 * i);
-    }
-  }, []);
+  for (var i = 0; i < 100; i++) {
+    setTimeout(() => requestAnimationFrame(() => triggerConfetti(i)), 10 * i);
+  }
 
   return (
     <div className="flex flex-col gap-12 text-center">
