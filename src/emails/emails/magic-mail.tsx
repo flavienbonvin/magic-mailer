@@ -3,7 +3,6 @@ import {
   Column,
   Container,
   Head,
-  Heading,
   Hr,
   Html,
   Img,
@@ -22,7 +21,7 @@ interface MagicMailProps {
 }
 
 export const MagicMail = ({ attendeeName, image1, image2 }: MagicMailProps) => {
-  const previewText = `Kubus vous réserve encore des surprises!`;
+  const previewText = "L'expérience se prolonge!";
 
   const socialImages = getSocialImageURL();
 
@@ -34,36 +33,48 @@ export const MagicMail = ({ attendeeName, image1, image2 }: MagicMailProps) => {
         <Body className="mx-auto my-auto bg-white font-sans">
           <Container className="mx-auto my-10 w-[465px] rounded border border-solid border-gray-200 p-5">
             <Section>
-              <Heading className="mx-0 my-8 p-0 text-center text-2xl font-normal text-black">
-                Merci d&apos;avoir participé à l&apos;extraordinaire Expérience!
-              </Heading>
               <Text className="text-sm leading-6 text-black">
-                {attendeeName ? `Bonsoir ${attendeeName},` : "Bonsoir,"}
+                {attendeeName ? `Cher ${attendeeName},` : "Cher spectateur,"}
               </Text>
               <Text className="text-sm leading-6 text-black">
-                Nous tenons à vous exprimer notre profonde gratitude d&apos;avoir choisi de partager
-                ce moment magique avec nous ce soir.
+                Vous avez été un public incroyable, pour vous remercier je tenais à ce que vous
+                emportiez un souvenir magique.
               </Text>
             </Section>
-            <Section className="mt-8">
+
+            <Section>
+              <Text className="text-sm leading-6 text-black">
+                Vous avez reçu cet email avant le début du spectacle. Tout était aléatoire et
+                pourtant Kubus avait tout prédit.
+              </Text>
+            </Section>
+
+            {/* Image 1 */}
+            <Section>
+              <Text className="text-sm leading-6 text-black">
+                Voici la photo de la prédiction dans le coffre :
+              </Text>
+
               <Img width="600" height="600" className="object-contain" src={image1} />
             </Section>
-            <Section className="my-8">
+
+            {/* Image 2 */}
+            <Section className="mt-4">
               <Text className="text-sm leading-6 text-black">
-                Comme les mystères se dévoilent et que les écrans s&apos;animent, vous serez
-                émerveillés par les prédictions incroyables de Marco. Chaque instant capturé est
-                bien plus qu&apos;une simple coïncidence. C&apos;est l&apos;essence même de la
-                magie, tissée dans chaque prédiction.
+                Et pour finir, zoomer dans les yeux de la célébrité, un regard ne ment jamais :
               </Text>
-            </Section>
-            <Section>
               <Img width="600" height="600" className="object-contain" src={image2} />
             </Section>
-            <Hr className="mx-0 my-7 w-full border border-solid border-gray-200" />
-            <Text className="text-center text-xs leading-6 text-gray-400">
-              Restez connectés avec l&apos;univers fascinant de Marco en explorant davantage sur son
-              site web et en le suivant sur les réseaux sociaux :
-            </Text>
+
+            <Section>
+              <Text className="text-sm leading-6 text-black">
+                Votre magicien,
+                <br /> Marco
+              </Text>
+            </Section>
+
+            <Hr />
+
             <Row className="text-center text-gray-400">
               <Column>
                 <a href="https://www.redcurtain.ch/" target="_blank" rel="noopener noreferrer">

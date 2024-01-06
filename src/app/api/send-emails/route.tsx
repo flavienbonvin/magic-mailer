@@ -22,7 +22,7 @@ export async function POST(request: Request) {
 
   const sentFrom = new Sender("info@redcurtain.ch", "Marco Smacchia");
   const emailParams = attendees.map((attendee) => {
-    const attendeeName = `${attendee.firstName} ${attendee.lastName}`;
+    const attendeeName = `${attendee.firstName}`;
     const recipient = new Recipient(attendee.email, attendeeName);
 
     const emailHtml = render(
@@ -36,7 +36,7 @@ export async function POST(request: Request) {
     return new EmailParams()
       .setFrom(sentFrom)
       .setTo([recipient])
-      .setSubject("Un dernier tour de Kubus")
+      .setSubject("⚠️ A ouvrir à la fin du spectacle ⚠️ - Expérience")
       .setHtml(emailHtml);
   });
 
