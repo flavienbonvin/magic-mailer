@@ -3,7 +3,7 @@ import { ShowStatus } from "@/data/schema";
 import { render } from "@react-email/render";
 
 import { getAttendeesForShow } from "@/data/actions/attendees";
-import { MagicMail } from "@/emails/emails/magic-mail";
+import MagicMail from "@/emails/emails/magic-mail";
 import { getImageURL } from "@/lib/image";
 import { EmailParams, MailerSend, Recipient, Sender } from "mailersend";
 
@@ -26,11 +26,11 @@ export async function POST(request: Request) {
     const recipient = new Recipient(attendee.email, attendeeName);
 
     const emailHtml = render(
-      <MagicMail
-        attendeeName={attendeeName}
-        image1={getImageURL(show?.image1Name)}
-        image2={getImageURL(show?.image2Name)}
-      />,
+      MagicMail({
+        attendeeName,
+        image1: getImageURL(show?.image1Name),
+        image2: getImageURL(show?.image2Name),
+      }),
     );
 
     return new EmailParams()
