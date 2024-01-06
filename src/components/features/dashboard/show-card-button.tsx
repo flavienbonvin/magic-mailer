@@ -27,5 +27,5 @@ export const ShowCardButton = ({ show }: ShowCardProps) => {
     return <ReturnButton text="Ajouter images" href={PAGES.STEP2(show.id)} />;
   }
 
-  return <ReturnButton text="Résumé" href={PAGES.SUMMARY} />;
+  return <ReturnButton text="Résumé" href={PAGES.SUMMARY(show.id)} />;
 };

@@ -28,7 +28,7 @@ const ConfirmationStepPicture = ({ showID }: ConfirmationStepPictureProps) => {
       method: "POST",
       body: JSON.stringify({ showID, status: ShowStatus.finished }),
     });
-    router.push(PAGES.SUMMARY);
+    router.push(PAGES.SUMMARY(showID));
   };
 
   return (

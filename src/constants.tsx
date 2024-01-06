@@ -9,7 +9,7 @@ export const PAGES = {
   SIMLE_STEP2: "/steps/2",
   STEP1: (showId: number) => `/steps/1?showID=${showId}`,
   STEP2: (showId: number) => `/steps/2?showID=${showId}`,
-  SUMMARY: "/summary",
+  SUMMARY: (showId: number) => `/summary?showID=${showId}`,
   HELP: "/help",
   ADMIN: "/admin",
   EXPERIENCE: "/experience",

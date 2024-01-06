@@ -63,6 +63,11 @@ export const getAttendeesForShow = (showId: number) => {
   });
 };
 
+export const getAttendeesCountForShow = async (showId: number) => {
+  const attendees = await getAttendeesForShow(showId);
+  return attendees.length
+}
+
 export const getAttdeneesBySource = (source: AttendeeSource) => {
   return db.query.attendees.findMany({
     where: eq(attendees.source, source),
