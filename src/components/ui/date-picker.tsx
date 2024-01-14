@@ -34,7 +34,9 @@ const DatePicker = ({ date, setDate, showOutsideDays, mode = "single" }: DatePic
         <Calendar
           mode={mode}
           selected={date}
+          onDayClick={handleSelect}
           onSelect={handleSelect}
+          weekStartsOn={1}
           showOutsideDays={showOutsideDays}
         />
       </PopoverContent>
