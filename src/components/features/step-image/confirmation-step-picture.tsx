@@ -34,13 +34,13 @@ const ConfirmationStepPicture = ({ showID }: ConfirmationStepPictureProps) => {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button>Envoyer la photo</Button>
+        <Button>Terminer</Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Confirmez l&apos;envoi de la photo</AlertDialogTitle>
+          <AlertDialogTitle>Confirmer la fin de cette représentation</AlertDialogTitle>
           <AlertDialogDescription>
-            Cette action ne peut pas être annulée. Voulez-vous vraiment envoyer la photo ?
+            Cette action ne peut pas être annulée. Voulez-vous vraiment terminer la représentation?
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
