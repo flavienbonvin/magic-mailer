@@ -56,11 +56,11 @@ export const updateShow = async (id: number, show: NewShow) => {
   revalidatePath(PAGES.DASHBOARD);
 };
 
-export const updateShowImageStatus = async (id: number, imageID: 1 | 2) => {
+export const updateShowImageStatus = async (id: number, imageID: 1 | 2, value: boolean) => {
   if (imageID === 1) {
-    await db.update(shows).set({ image1Uploaded: true }).where(eq(shows.id, id));
+    await db.update(shows).set({ image1Uploaded: value }).where(eq(shows.id, id));
   } else if (imageID === 2) {
-    await db.update(shows).set({ image2Uploaded: true }).where(eq(shows.id, id));
+    await db.update(shows).set({ image2Uploaded: value }).where(eq(shows.id, id));
   }
 };
 

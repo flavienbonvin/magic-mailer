@@ -53,7 +53,7 @@ const UploadPicture = ({ show, pictureName, imageID }: UploadPicutreProps) => {
     if (!response) {
       setHadError(true);
     } else {
-      updateShowImageStatus(show.id, imageID);
+      updateShowImageStatus(show.id, imageID, true);
     }
 
     setUploading(false);
@@ -63,6 +63,7 @@ const UploadPicture = ({ show, pictureName, imageID }: UploadPicutreProps) => {
     setHadError(false);
     setPreview(undefined);
     setSelectedFile(undefined);
+    updateShowImageStatus(show.id, imageID, false);
   };
 
   return (
