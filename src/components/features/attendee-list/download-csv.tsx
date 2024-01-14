@@ -18,6 +18,7 @@ const formatDataForCsv = (attendees: Attendee[]) => {
     lastName: attendee.lastName,
     email: attendee.email,
     source: getAttendeeSource(attendee.source),
+    phoneNumber: attendee.phoneNumber,
   }));
   return data;
 };

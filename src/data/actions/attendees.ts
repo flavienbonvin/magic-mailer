@@ -77,6 +77,7 @@ export const getAttdeneesBySource = (source: AttendeeSource) => {
       lastName: true,
       email: true,
       source: true,
+      phoneNumber: true,
     },
   });
 };
@@ -89,6 +90,7 @@ export const getAllAttendees = () => {
       lastName: true,
       email: true,
       source: true,
+      phoneNumber: true,
     },
   });
 };
