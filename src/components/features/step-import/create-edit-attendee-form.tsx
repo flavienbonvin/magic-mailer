@@ -20,9 +20,9 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 const formSchema = z.object({
-  firstName: z.string(),
-  lastName: z.string(),
   email: z.string().email({ message: "L'adresse email n'est pas valide." }),
+  firstName: z.string().optional(),
+  lastName: z.string().optional(),
 });
 
 type FormSchema = z.infer<typeof formSchema>;
@@ -74,36 +74,6 @@ const CreateEditAttendeeForm = ({ attendee, setOpen }: CreateEditAttendeeFormPro
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <FormField
           control={form.control}
-          name="firstName"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>
-                Prénom <RequiredField />
-              </FormLabel>
-              <FormControl>
-                <Input {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="lastName"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>
-                Nom de famille <RequiredField />
-              </FormLabel>
-              <FormControl>
-                <Input {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
           name="email"
           render={({ field }) => (
             <FormItem>
@@ -117,6 +87,33 @@ const CreateEditAttendeeForm = ({ attendee, setOpen }: CreateEditAttendeeFormPro
             </FormItem>
           )}
         />
+        <FormField
+          control={form.control}
+          name="firstName"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Prénom</FormLabel>
+              <FormControl>
+                <Input {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="lastName"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Nom de famille</FormLabel>
+              <FormControl>
+                <Input {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
         <Button type="submit">Sauvegarder</Button>
       </form>
     </Form>

@@ -22,7 +22,7 @@ export async function POST(request: Request) {
 
   const sentFrom = new Sender("info@redcurtain.ch", "Marco Smacchia");
   const emailParams = attendees.map((attendee) => {
-    const attendeeName = `${attendee.firstName}`;
+    const attendeeName = attendee.firstName ?? undefined;
     const recipient = new Recipient(attendee.email, attendeeName);
 
     const emailHtml = render(

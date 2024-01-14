@@ -34,8 +34,8 @@ export enum ShowStatus {
 
 export const attendees = pgTable("attendee", {
   id: serial("id").primaryKey(),
-  firstName: text("first_name").notNull(),
-  lastName: text("last_name").notNull(),
+  firstName: text("first_name"),
+  lastName: text("last_name"),
   email: text("email").notNull(),
   phoneNumber: text("phone_number"),
   linkedShow: serial("linked_show").references(() => shows.id),

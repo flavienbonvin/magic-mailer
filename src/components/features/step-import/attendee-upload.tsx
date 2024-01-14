@@ -19,8 +19,8 @@ const AttendeeUpload = ({ showID, disableDeleAll }: AttendeeManagementProps) => 
     parseFileToAttendees(file, async (data: CSVAttendee[]) => {
       const formattedData: NewAttendee[] = data.map((attendee) => ({
         email: attendee.email ?? "",
-        firstName: attendee.firstName ?? "",
-        lastName: attendee.lastName ?? "",
+        firstName: attendee.firstName ?? undefined,
+        lastName: attendee.lastName ?? undefined,
         linkedShow: showID,
         source: AttendeeSource.import,
       }));
