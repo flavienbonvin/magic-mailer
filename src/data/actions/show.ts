@@ -56,6 +56,14 @@ export const updateShow = async (id: number, show: NewShow) => {
   revalidatePath(PAGES.DASHBOARD);
 };
 
+export const updateShowImageStatus = async (id: number, imageID: 1 | 2) => {
+  if (imageID === 1) {
+    await db.update(shows).set({ image1Uploaded: true }).where(eq(shows.id, id));
+  } else if (imageID === 2) {
+    await db.update(shows).set({ image2Uploaded: true }).where(eq(shows.id, id));
+  }
+};
+
 export const deleteShow = async (id: number) => {
   await db.delete(shows).where(eq(shows.id, id));
   revalidatePath(PAGES.DASHBOARD);

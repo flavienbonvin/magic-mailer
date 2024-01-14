@@ -2,20 +2,37 @@
 
 import { Button } from "@/components/ui/button";
 import DropZone from "@/components/ui/drop-zone";
+import { updateShowImageStatus } from "@/data/actions/show";
+import { Show } from "@/data/schema";
 import { uploadFile } from "@/data/supabase";
+import { getImageURL } from "@/lib/image";
 import { FileImage, Trash } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
 interface UploadPicutreProps {
+  show: Show;
   pictureName: string;
+  imageID: 1 | 2;
 }
 
-const UploadPicture = ({ pictureName }: UploadPicutreProps) => {
+const getImageDefaultValue = (show: Show, imageID: 1 | 2) => {
+  if (imageID === 1 && show.image1Uploaded) {
+    return getImageURL(show.image1Name);
+  } else if (imageID === 2 && show.image2Uploaded) {
+    return getImageURL(show.image2Name);
+  }
+
+  return undefined;
+};
+
+const UploadPicture = ({ show, pictureName, imageID }: UploadPicutreProps) => {
   const [selectedFile, setSelectedFile] = useState<File | undefined>();
   const [hadError, setHadError] = useState(false);
   const [uploading, setUploading] = useState(false);
-  const [preview, setPreview] = useState<string | undefined>(undefined);
+  const [preview, setPreview] = useState<string | undefined>(() =>
+    getImageDefaultValue(show, imageID),
+  );
 
   useEffect(() => {
     if (!selectedFile) {
@@ -35,7 +52,10 @@ const UploadPicture = ({ pictureName }: UploadPicutreProps) => {
     const response = await uploadFile(file, pictureName);
     if (!response) {
       setHadError(true);
+    } else {
+      updateShowImageStatus(show.id, imageID);
     }
+
     setUploading(false);
   };
 

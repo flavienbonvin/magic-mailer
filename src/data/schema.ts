@@ -17,6 +17,8 @@ export const shows = pgTable("show", {
   date: timestamp("date").notNull(),
   status: integer("status").notNull(),
   image1Name: uuid("image1_name").notNull(),
+  image1Uploaded: boolean("image1_uploaded").default(false),
+  image2Uploaded: boolean("image2_uploaded").default(false),
   image2Name: uuid("image2_name").notNull(),
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
