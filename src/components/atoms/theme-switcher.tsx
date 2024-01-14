@@ -3,6 +3,7 @@
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import { Button } from "../ui/button";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
 
 const ThemeSwitcher = () => {
   const { theme, setTheme } = useTheme();
@@ -13,9 +14,18 @@ const ThemeSwitcher = () => {
 
   const child = theme === "dark" ? <Sun /> : <Moon />;
   return (
-    <Button onClick={handleClick} size="icon" variant="ghost" type="button">
-      {child}
-    </Button>
+    <TooltipProvider>
+      <Tooltip>
+        <TooltipTrigger>
+          <Button onClick={handleClick} size="icon" variant="ghost" type="button">
+            {child}
+          </Button>
+        </TooltipTrigger>
+        <TooltipContent>
+          {theme === "dark" ? "Passer en mode clair" : "Passer en mode sombre"}
+        </TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
   );
 };
 
