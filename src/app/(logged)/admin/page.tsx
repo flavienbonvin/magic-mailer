@@ -5,13 +5,6 @@ import { getCookie } from "@/lib/cookie";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 
-interface Data {
-  id: string;
-  email: string;
-  isAdmin: boolean;
-}
-
-// TODO add loader
 export default async function Page() {
   const cookie = getCookie();
   const user = await getUser(cookie?.value);
