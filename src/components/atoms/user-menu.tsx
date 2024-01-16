@@ -29,7 +29,7 @@ const UserMenu = async () => {
         {user?.isAdmin && (
           <>
             <DropdownMenuSeparator />
-            <Link href={PAGES.ADMIN}>
+            <Link href={PAGES.ADMIN} prefetch={false}>
               <DropdownMenuItem>Admin</DropdownMenuItem>
             </Link>
           </>
