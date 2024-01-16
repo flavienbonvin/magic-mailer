@@ -42,7 +42,7 @@ export default function Page({ searchParams }: { searchParams: { firstName?: str
       </CardHeader>
       <CardContent className="flex flex-col gap-3 text-white">
         {searchParams.firstName ? <p>Merci {searchParams.firstName}!</p> : <p>Merci!</p>}
-        <p>La magie va commencer dans un instant, installez-vous confortablement...</p>
+        <p>Le spectacle va commencer dans un instant, installez-vous confortablement...</p>
       </CardContent>
     </Card>
   );
