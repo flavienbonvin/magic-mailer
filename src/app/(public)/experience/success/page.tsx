@@ -1,12 +1,12 @@
 "use client";
 
-import H1 from "@/components/typography/h1";
+import { Card, CardContent, CardDescription, CardHeader } from "@/components/ui/card";
 import confetti from "canvas-confetti";
-import { PartyPopper } from "lucide-react";
+import { Check } from "lucide-react";
 
 const colors = [
-  ["#FF3E41", "#FF4D80"],
-  ["#8F95D3", "#883955"],
+  ["#2A4E97", "#FFFFFF"],
+  ["#1C1C24", "#1C1C24"],
 ];
 
 const triggerConfetti = (value: number) => {
@@ -26,22 +26,24 @@ const triggerConfetti = (value: number) => {
   });
 };
 
-export default function Page() {
+export default function Page({ searchParams }: { searchParams: { firstName?: string } }) {
   for (var i = 0; i < 100; i++) {
     setTimeout(() => requestAnimationFrame(() => triggerConfetti(i)), 10 * i);
   }
 
   return (
-    <div className="flex flex-col gap-12 text-center">
-      <section className="flex justify-between">
-        <PartyPopper size={64} strokeWidth={1.5} color={colors[0][1]} />
-        <PartyPopper size={64} strokeWidth={1.5} color={colors[0][1]} />
-        <PartyPopper size={64} strokeWidth={1.5} color={colors[0][1]} />
-      </section>
-      <section className="flex flex-col gap-2">
-        <H1>Succès!</H1>
-        <p>Les informations ont été sauvegardées!</p>
-      </section>
-    </div>
+    <Card className="bg-grayExperience sm:w-[500px]">
+      <CardHeader>
+        <CardDescription className="text-white">
+          <div className="bg-blueExperience mx-auto flex h-14 w-14 items-center justify-center rounded-full text-white">
+            <Check size={24} />
+          </div>
+        </CardDescription>
+      </CardHeader>
+      <CardContent className="flex flex-col gap-3 text-white">
+        {searchParams.firstName ? <p>Merci {searchParams.firstName}!</p> : <p>Merci!</p>}
+        <p>La magie va commencer dans un instant, installez-vous confortablement...</p>
+      </CardContent>
+    </Card>
   );
 }

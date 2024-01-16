@@ -19,7 +19,7 @@ export const insertExperienceAttendee = async (data: NewAttendee) => {
     throw new Error("No show today");
   }
   await db.insert(attendees).values({ ...data, linkedShow: todayShow.id });
-  redirect(PAGES.EXPERIENCE_SUCCESS);
+  redirect(PAGES.EXPERIENCE_SUCCESS(data.firstName));
 };
 
 export const insertMultipleAttendees = async (data: NewAttendee[]) => {
@@ -65,8 +65,8 @@ export const getAttendeesForShow = (showId: number) => {
 
 export const getAttendeesCountForShow = async (showId: number) => {
   const attendees = await getAttendeesForShow(showId);
-  return attendees.length
-}
+  return attendees.length;
+};
 
 export const getAttdeneesBySource = (source: AttendeeSource) => {
   return db.query.attendees.findMany({

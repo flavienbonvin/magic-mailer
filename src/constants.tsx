@@ -13,7 +13,7 @@ export const PAGES = {
   HELP: "/help",
   ADMIN: "/admin",
   EXPERIENCE: "/experience",
-  EXPERIENCE_SUCCESS: "/experience/success",
+  EXPERIENCE_SUCCESS: (firstName: string) => `/experience/success?firstName=${firstName}`,
   ATTENDEE_LIST: "/attendee-list",
   API_SEND_EMAIL: "/api/send-emails",
   API_UPDATE_SHOW: "/api/update-show-status",

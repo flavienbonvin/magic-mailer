@@ -39,7 +39,7 @@ export const getTodatShow = async () => {
 
 export const isShowToday = async () => {
   const show = await getTodatShow();
-  return !!show;
+  return show;
 };
 
 export const insertShow = async (show: NewShow) => {
