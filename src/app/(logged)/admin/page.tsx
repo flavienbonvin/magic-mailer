@@ -1,4 +1,4 @@
-export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 import AdminsTable from "@/components/features/admin/admins-table";
 import H1 from "@/components/typography/h1";
