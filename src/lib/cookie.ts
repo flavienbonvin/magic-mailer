@@ -5,6 +5,9 @@ import { cookies } from "next/headers";
 
 const cookieOption = {
   maxAge: AUTH_COOKIE_MAX_AGE,
+  httpOnly: true,
+  path: "/",
+  secure: true,
 };
 
 export const hasValidCookie = () => {
