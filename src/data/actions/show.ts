@@ -31,15 +31,14 @@ export const getShowById = async (id: number) => {
   });
 };
 
-export const getTodatShow = async () => {
+export const getTodayShow = async () => {
   return await db.query.shows.findFirst({
-    where: and(gte(shows.date, startOfToday()), lte(shows.date, endOfToday())),
+    where: and(
+      gte(shows.date, startOfToday()),
+      lte(shows.date, endOfToday()),
+      eq(shows.status, ShowStatus.incoming),
+    ),
   });
-};
-
-export const isShowToday = async () => {
-  const show = await getTodatShow();
-  return show;
 };
 
 export const insertShow = async (show: NewShow) => {

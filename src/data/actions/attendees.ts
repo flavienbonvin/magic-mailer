@@ -6,7 +6,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { db } from "../db";
 import { AttendeeSource, NewAttendee, attendees } from "../schema";
-import { getTodatShow } from "./show";
+import { getTodayShow } from "./show";
 
 export const insertAttendee = async (data: NewAttendee) => {
   await db.insert(attendees).values(data);
@@ -14,7 +14,7 @@ export const insertAttendee = async (data: NewAttendee) => {
 };
 
 export const insertExperienceAttendee = async (data: NewAttendee) => {
-  const todayShow = await getTodatShow();
+  const todayShow = await getTodayShow();
   if (!todayShow) {
     throw new Error("No show today");
   }
