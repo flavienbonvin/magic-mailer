@@ -19,7 +19,11 @@ export const insertExperienceAttendee = async (data: NewAttendee) => {
     throw new Error("No show today");
   }
   await db.insert(attendees).values({ ...data, linkedShow: todayShow.id });
-  redirect(PAGES.EXPERIENCE_SUCCESS(data.firstName));
+  if (data.firstName) {
+    redirect(PAGES.EXPERIENCE_SUCCESS(data.firstName));
+  } else {
+    redirect(PAGES.SIMPLE_EXPERIENCE_SUCCESS);
+  }
 };
 
 export const insertMultipleAttendees = async (data: NewAttendee[]) => {
