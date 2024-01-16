@@ -1,7 +1,7 @@
-import { PAGES } from "@/constants";
+import { AUTH_COOKIE, PAGES } from "@/constants";
 import { getUser } from "@/data/actions/user";
-import { getCookie } from "@/lib/cookie";
 import { MenuIcon } from "lucide-react";
+import { cookies } from "next/headers";
 import Link from "next/link";
 import { Button } from "../ui/button";
 import {
@@ -14,7 +14,7 @@ import {
 } from "../ui/dropdown-menu";
 
 const UserMenu = async () => {
-  const cookie = getCookie()?.value;
+  const cookie = cookies().get(AUTH_COOKIE)?.value;
   const user = await getUser(cookie);
 
   return (

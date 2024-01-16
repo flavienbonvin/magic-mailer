@@ -1,11 +1,11 @@
 import LoginForm from "@/components/features/home/login-form";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { PAGES } from "@/constants";
-import { hasValidCookie } from "@/lib/cookie";
+import { AUTH_COOKIE, PAGES } from "@/constants";
+import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 export default function Home() {
-  const validCookie = hasValidCookie();
+  const validCookie = cookies().has(AUTH_COOKIE);
   if (validCookie) {
     redirect(PAGES.DASHBOARD);
   }
