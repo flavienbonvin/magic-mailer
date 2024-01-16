@@ -7,10 +7,7 @@ import { notFound } from "next/navigation";
 
 export default async function Page() {
   const cookie = cookies().get(AUTH_COOKIE)?.value;
-  console.log({ cookie });
-
   const user = await getUser(cookie);
-  console.log({ user });
 
   if (!user?.isAdmin) {
     return notFound();
