@@ -15,7 +15,6 @@ export async function login(email: string) {
     maxAge: AUTH_COOKIE_MAX_AGE,
     httpOnly: true,
     path: "/",
-    secure: true,
   });
 
   redirect(PAGES.DASHBOARD);
