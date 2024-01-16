@@ -1,8 +1,8 @@
 "use server";
 
-import { PAGES } from "@/constants";
+import { AUTH_COOKIE, AUTH_COOKIE_MAX_AGE, PAGES } from "@/constants";
+import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { createCookie } from "../../lib/cookie";
 import { getAllowedEmails } from "./user";
 
 export async function login(email: string) {
@@ -11,6 +11,12 @@ export async function login(email: string) {
     return;
   }
 
-  createCookie(email);
+  cookies().set(AUTH_COOKIE, email, {
+    maxAge: AUTH_COOKIE_MAX_AGE,
+    httpOnly: true,
+    path: "/",
+    secure: true,
+  });
+
   redirect(PAGES.DASHBOARD);
 }

@@ -1,7 +1,6 @@
-import { PAGES } from "@/constants";
-import { getUser } from "@/data/actions/user";
-import { getCookie } from "@/lib/cookie";
+import { AUTH_COOKIE, PAGES } from "@/constants";
 import { MenuIcon } from "lucide-react";
+import { cookies } from "next/headers";
 import Link from "next/link";
 import { Button } from "../ui/button";
 import {
@@ -9,13 +8,11 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 
 const UserMenu = async () => {
-  const cookie = getCookie()?.value;
-  const user = await getUser(cookie);
+  const cookie = cookies().get(AUTH_COOKIE)?.value;
 
   return (
     <DropdownMenu>
@@ -26,20 +23,10 @@ const UserMenu = async () => {
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuLabel>Magic Mail</DropdownMenuLabel>
-        {user?.isAdmin && (
-          <>
-            <DropdownMenuSeparator />
-            <Link href={PAGES.ADMIN}>
-              <DropdownMenuItem>Admin</DropdownMenuItem>
-            </Link>
-          </>
-        )}
-        <DropdownMenuSeparator />
         {cookie && <DropdownMenuItem>{cookie}</DropdownMenuItem>}
         <Link href={PAGES.LOGOUT}>
           <DropdownMenuItem>Se déconnecter</DropdownMenuItem>
         </Link>
-        <DropdownMenuSeparator />
       </DropdownMenuContent>
     </DropdownMenu>
   );

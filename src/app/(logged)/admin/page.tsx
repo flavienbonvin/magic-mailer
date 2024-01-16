@@ -1,20 +1,13 @@
 import AdminsTable from "@/components/features/admin/admins-table";
 import H1 from "@/components/typography/h1";
+import { AUTH_COOKIE } from "@/constants";
 import { getUser } from "@/data/actions/user";
-import { getCookie } from "@/lib/cookie";
+import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
-import { Suspense } from "react";
 
-interface Data {
-  id: string;
-  email: string;
-  isAdmin: boolean;
-}
-
-// TODO add loader
 export default async function Page() {
-  const cookie = getCookie();
-  const user = await getUser(cookie?.value);
+  const cookie = cookies().get(AUTH_COOKIE)?.value;
+  const user = await getUser(cookie);
 
   if (!user?.isAdmin) {
     return notFound();
@@ -23,9 +16,7 @@ export default async function Page() {
   return (
     <div className="w-screen">
       <H1>Gestion des accès</H1>
-      <Suspense>
-        <AdminsTable />
-      </Suspense>
+      <AdminsTable />
     </div>
   );
 }

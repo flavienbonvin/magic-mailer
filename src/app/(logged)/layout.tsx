@@ -1,7 +1,7 @@
 import Header from "@/components/layout/header";
-import { PAGES } from "@/constants";
-import { hasValidCookie } from "@/lib/cookie";
+import { AUTH_COOKIE, PAGES } from "@/constants";
 import type { Metadata } from "next";
+import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 };
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  const validCookie = hasValidCookie();
+  const validCookie = cookies().has(AUTH_COOKIE);
   if (!validCookie) {
     redirect(PAGES.LOGIN);
   }

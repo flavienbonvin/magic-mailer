@@ -6,6 +6,7 @@ import TabTrigger from "@/components/features/shared/tab-trigger";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList } from "@/components/ui/tabs";
 import { PAGES } from "@/constants";
+import { Lock, User } from "lucide-react";
 import Link from "next/link";
 import { Suspense } from "react";
 
@@ -14,11 +15,18 @@ export default function Home({ searchParams }: { searchParams: { tab?: string } 
 
   return (
     <div className="flex w-full flex-col gap-10">
-      <div className="flex flex-col gap-6 sm:flex-row sm:justify-end">
+      <div className="flex flex-col gap-2 sm:flex-row sm:justify-end sm:gap-4">
         <CreateEditShowModal />
         <Link href={PAGES.ATTENDEE_LIST}>
-          <Button variant="outline" className="w-full">
-            Gestion des spectateurs
+          <Button variant="outline" className="w-full sm:w-auto">
+            <User size={16} className="mr-2" />
+            Specateurs
+          </Button>
+        </Link>
+        <Link href={PAGES.ADMIN}>
+          <Button variant="outline" className="w-full sm:w-auto">
+            <Lock size={16} className="mr-2" />
+            Admin
           </Button>
         </Link>
       </div>
