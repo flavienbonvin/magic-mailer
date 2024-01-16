@@ -40,9 +40,6 @@ const UserMenu = async () => {
           <DropdownMenuItem>Se déconnecter</DropdownMenuItem>
         </Link>
         <DropdownMenuSeparator />
-        <Link href={PAGES.HELP}>
-          <DropdownMenuItem>Aide</DropdownMenuItem>
-        </Link>
       </DropdownMenuContent>
     </DropdownMenu>
   );

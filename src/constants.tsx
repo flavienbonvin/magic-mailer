@@ -10,7 +10,6 @@ export const PAGES = {
   STEP1: (showId: number) => `/steps/1?showID=${showId}`,
   STEP2: (showId: number) => `/steps/2?showID=${showId}`,
   SUMMARY: (showId: number) => `/summary?showID=${showId}`,
-  HELP: "/help",
   ADMIN: "/admin",
   EXPERIENCE: "/experience",
   EXPERIENCE_SUCCESS: (firstName: string) => `/experience/success?firstName=${firstName}`,
