@@ -1,5 +1,3 @@
-export const revalidate = 0;
-
 import AdminsTable from "@/components/features/admin/admins-table";
 import H1 from "@/components/typography/h1";
 import { AUTH_COOKIE } from "@/constants";

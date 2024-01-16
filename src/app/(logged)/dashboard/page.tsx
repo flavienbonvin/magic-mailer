@@ -14,6 +14,9 @@ export default function Home({ searchParams }: { searchParams: { tab?: string } 
 
   return (
     <div className="flex w-full flex-col gap-10">
+      <Link href={PAGES.ADMIN} prefetch={false}>
+        Admin
+      </Link>
       <div className="flex flex-col gap-6 sm:flex-row sm:justify-end">
         <CreateEditShowModal />
         <Link href={PAGES.ATTENDEE_LIST}>
@@ -21,6 +24,7 @@ export default function Home({ searchParams }: { searchParams: { tab?: string } 
             Gestion des spectateurs
           </Button>
         </Link>
+        L
       </div>
       <div className="mb-20 flex flex-col gap-10">
         <TodayShow />
