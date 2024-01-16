@@ -1,4 +1,5 @@
 import H1 from "@/components/typography/h1";
+import H2 from "@/components/typography/h2";
 import StatCard from "@/components/ui/stats-card";
 import { getAttendeesCountForShow } from "@/data/actions/attendees";
 import { getShowById } from "@/data/actions/show";
@@ -21,7 +22,7 @@ export default async function Page({ searchParams }: { searchParams: { [key: str
     <div className="flex flex-col gap-12">
       <div>
         <H1>Résumé de la représentation</H1>
-        <h2 className="text-3xl font-semibold tracking-tight first:mt-0">{show?.name}</h2>
+        <H2>{show?.name}</H2>
       </div>
       <div className="grid gap-4 md:grid-cols-2">
         {dateString && <StatCard name="Date de la représentation" stats={dateString} />}

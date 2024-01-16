@@ -1,3 +1,4 @@
+import H2 from "@/components/typography/h2";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -22,7 +23,7 @@ const ShowListLoader = ({ title, status = ShowStatus.incoming }: ShowListLoaderP
 
   return (
     <section>
-      <h2 className="mb-4 text-2xl font-semibold tracking-tight first:mt-0">{title}</h2>
+      <H2>{title}</H2>
       <div className="grid gap-2 md:grid-cols-2 lg:grid-cols-3 lg:gap-4">
         <Card>
           <CardHeader>
