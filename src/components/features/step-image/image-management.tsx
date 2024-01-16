@@ -17,11 +17,11 @@ const ImageManagement = async ({ showId }: ImageManagementProps) => {
     <div className="mb-20 flex gap-4">
       <div className="flex w-full flex-col gap-2">
         <H2>Première image</H2>
-        <UploadPicture pictureName={show.image1Name} />
+        <UploadPicture show={show} pictureName={show.image1Name} imageID={1} />
       </div>
       <div className="flex w-full flex-col gap-2">
         <H2>Seconde image</H2>
-        <UploadPicture pictureName={show.image2Name} />
+        <UploadPicture show={show} pictureName={show.image2Name} imageID={2} />
       </div>
     </div>
   );

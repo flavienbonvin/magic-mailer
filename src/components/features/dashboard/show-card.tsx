@@ -1,3 +1,4 @@
+import { getAttendeesCountForShow } from "@/data/actions/attendees";
 import { Show, ShowStatus } from "@/data/schema";
 import {
   Card,
@@ -16,7 +17,9 @@ interface ShowCardProps {
   show: Show;
 }
 
-const ShowCard = ({ show }: ShowCardProps) => {
+const ShowCard = async ({ show }: ShowCardProps) => {
+  const showAttendees = await getAttendeesCountForShow(show.id);
+
   return (
     <Card>
       <CardHeader>
@@ -31,7 +34,7 @@ const ShowCard = ({ show }: ShowCardProps) => {
         {show.status !== ShowStatus.finished && (
           <div>
             <CreateEditShowModal show={show} />
-            <DeleteShowModal show={show} />
+            <DeleteShowModal show={show} showAttendees={showAttendees} />
           </div>
         )}
       </CardFooter>

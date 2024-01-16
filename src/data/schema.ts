@@ -17,6 +17,8 @@ export const shows = pgTable("show", {
   date: timestamp("date").notNull(),
   status: integer("status").notNull(),
   image1Name: uuid("image1_name").notNull(),
+  image1Uploaded: boolean("image1_uploaded").default(false),
+  image2Uploaded: boolean("image2_uploaded").default(false),
   image2Name: uuid("image2_name").notNull(),
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
@@ -32,8 +34,8 @@ export enum ShowStatus {
 
 export const attendees = pgTable("attendee", {
   id: serial("id").primaryKey(),
-  firstName: text("first_name").notNull(),
-  lastName: text("last_name").notNull(),
+  firstName: text("first_name"),
+  lastName: text("last_name"),
   email: text("email").notNull(),
   phoneNumber: text("phone_number"),
   linkedShow: serial("linked_show").references(() => shows.id),

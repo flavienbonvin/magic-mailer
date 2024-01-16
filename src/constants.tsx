@@ -12,6 +12,7 @@ export const PAGES = {
   SUMMARY: (showId: number) => `/summary?showID=${showId}`,
   ADMIN: "/admin",
   EXPERIENCE: "/experience",
+  SIMPLE_EXPERIENCE_SUCCESS: "/simple-experience",
   EXPERIENCE_SUCCESS: (firstName: string) => `/experience/success?firstName=${firstName}`,
   ATTENDEE_LIST: "/attendee-list",
   API_SEND_EMAIL: "/api/send-emails",

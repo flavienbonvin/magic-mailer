@@ -12,15 +12,35 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { deleteShow } from "@/data/actions/show";
 import { Show } from "@/data/schema";
 import { Trash } from "lucide-react";
 
 interface CreateShowModalProps {
   show: Show;
+  showAttendees: number;
 }
 
-const DeleteShowModal = ({ show }: CreateShowModalProps) => {
+const DisabledDeleteButton = () => {
+  return (
+    <TooltipProvider>
+      <Tooltip>
+        <TooltipTrigger>
+          <Button size="icon" variant="ghost" disabled>
+            <Trash size={16} />
+          </Button>
+        </TooltipTrigger>
+        <TooltipContent className="text-center">
+          Supprimer les participants avant
+          <br /> de pouvoir supprimer la représentation
+        </TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
+  );
+};
+
+const DeleteShowModal = ({ show, showAttendees }: CreateShowModalProps) => {
   const handleDelete = async () => {
     if (!show.id) return;
     await deleteShow(show.id);
@@ -29,9 +49,13 @@ const DeleteShowModal = ({ show }: CreateShowModalProps) => {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button size="icon" variant="ghost">
-          <Trash size={16} />
-        </Button>
+        {!!showAttendees ? (
+          <DisabledDeleteButton />
+        ) : (
+          <Button size="icon" variant="ghost">
+            <Trash size={16} />
+          </Button>
+        )}
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>

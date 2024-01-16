@@ -20,7 +20,7 @@ export const ShowCardButton = ({ show }: ShowCardProps) => {
   const emailSent = show.status === ShowStatus.emailSent;
 
   if (incoming) {
-    return <ReturnButton text="Ajouter participants" href={PAGES.STEP1(show.id)} />;
+    return <ReturnButton text="Commencer le tour" href={PAGES.STEP1(show.id)} />;
   }
 
   if (emailSent) {
