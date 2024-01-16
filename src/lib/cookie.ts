@@ -3,13 +3,12 @@
 import { AUTH_COOKIE, AUTH_COOKIE_MAX_AGE } from "@/constants";
 import { cookies } from "next/headers";
 
-const getCookiesOptions = (email: string) => ({
-  name: AUTH_COOKIE,
+const cookieOption = {
   maxAge: AUTH_COOKIE_MAX_AGE,
-  value: email,
   httpOnly: true,
   path: "/",
-});
+  secure: true,
+};
 
 export const hasValidCookie = () => {
   const cookieStore = cookies();
@@ -23,5 +22,5 @@ export const getCookie = () => {
 
 export const createCookie = (email: string) => {
   const cookieStore = cookies();
-  cookieStore.set(AUTH_COOKIE, email, getCookiesOptions(email));
+  cookieStore.set(AUTH_COOKIE, email, cookieOption);
 };

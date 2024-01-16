@@ -15,6 +15,7 @@ interface Data {
 export default async function Page() {
   const cookie = getCookie();
   const user = await getUser(cookie?.value);
+  console.log(user);
 
   if (!user?.isAdmin) {
     return notFound();
