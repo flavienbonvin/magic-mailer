@@ -13,8 +13,6 @@ export async function login(email: string) {
 
   cookies().set(AUTH_COOKIE, email, {
     maxAge: AUTH_COOKIE_MAX_AGE,
-    httpOnly: true,
-    path: "/",
   });
 
   redirect(PAGES.DASHBOARD);
