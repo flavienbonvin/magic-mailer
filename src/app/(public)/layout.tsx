@@ -1,8 +1,12 @@
+import clsx from "clsx";
+import localFont from "next/font/local";
 import Image from "next/image";
+
+const Satoshi = localFont({ src: "./Satoshi.woff2" });
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <main className="flex h-screen w-screen justify-center bg-black">
+    <main className={clsx("flex h-screen w-screen justify-center bg-black", Satoshi.className)}>
       <section className="absolute mx-auto">
         <Image
           src="/images/experience-visual.png"
