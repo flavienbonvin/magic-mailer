@@ -4,7 +4,6 @@ import { AUTH_COOKIE } from "@/constants";
 import { getUser } from "@/data/actions/user";
 import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
-import { Suspense } from "react";
 
 export const dynamic = "force-dynamic";
 
@@ -22,9 +21,7 @@ export default async function Page() {
   return (
     <div className="w-screen">
       <H1>Gestion des accès</H1>
-      <Suspense>
-        <AdminsTable />
-      </Suspense>
+      <AdminsTable />
     </div>
   );
 }
