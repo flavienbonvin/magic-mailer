@@ -5,7 +5,7 @@ export const toastSaveAttendees = (size: number) => {
 };
 
 export const toastSaveAttendee = () => {
-  toast.success(`Participant sauvés !`);
+  toast.success(`Participant sauvé !`);
 };
 
 export const toastDeletedAttendee = () => {

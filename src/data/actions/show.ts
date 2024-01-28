@@ -36,7 +36,7 @@ export const getTodayShow = async () => {
     where: and(
       gte(shows.date, startOfToday()),
       lte(shows.date, endOfToday()),
-      eq(shows.status, ShowStatus.incoming),
+      or(eq(shows.status, ShowStatus.incoming), eq(shows.status, ShowStatus.emailSent)),
     ),
   });
 };

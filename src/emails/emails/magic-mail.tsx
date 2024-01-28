@@ -76,6 +76,7 @@ export const MagicMail = ({ attendeeName, image1, image2 }: MagicMailProps) => {
             <Hr />
 
             <Row className="text-center text-gray-400">
+              <Text>Vous pouvez me suivre sur mon site web ou mes différents réseaux sociaux</Text>
               <Column>
                 <a href="https://www.redcurtain.ch/" target="_blank" rel="noopener noreferrer">
                   <Img width="24" height="24" src={socialImages.globe} className="m-auto" />

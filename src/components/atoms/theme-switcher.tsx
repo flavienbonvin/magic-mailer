@@ -16,12 +16,12 @@ const ThemeSwitcher = () => {
   return (
     <TooltipProvider>
       <Tooltip>
-        <TooltipTrigger>
+        <TooltipTrigger asChild>
           <Button onClick={handleClick} size="icon" variant="ghost" type="button">
             {child}
           </Button>
         </TooltipTrigger>
-        <TooltipContent>
+        <TooltipContent asChild>
           {theme === "dark" ? "Passer en mode clair" : "Passer en mode sombre"}
         </TooltipContent>
       </Tooltip>
