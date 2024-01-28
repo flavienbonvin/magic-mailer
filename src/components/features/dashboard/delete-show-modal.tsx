@@ -26,10 +26,12 @@ const DisabledDeleteButton = () => {
   return (
     <TooltipProvider>
       <Tooltip>
-        <TooltipTrigger>
-          <Button size="icon" variant="ghost" disabled>
-            <Trash size={16} />
-          </Button>
+        <TooltipTrigger asChild>
+          <span>
+            <Button size="icon" variant="ghost" disabled>
+              <Trash size={16} />
+            </Button>
+          </span>
         </TooltipTrigger>
         <TooltipContent className="text-center">
           Supprimer les participants avant
@@ -46,16 +48,16 @@ const DeleteShowModal = ({ show, showAttendees }: CreateShowModalProps) => {
     await deleteShow(show.id);
   };
 
+  if (!!showAttendees) {
+    return <DisabledDeleteButton />;
+  }
+
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        {!!showAttendees ? (
-          <DisabledDeleteButton />
-        ) : (
-          <Button size="icon" variant="ghost">
-            <Trash size={16} />
-          </Button>
-        )}
+        <Button size="icon" variant="ghost">
+          <Trash size={16} />
+        </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
