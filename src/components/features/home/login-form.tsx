@@ -52,7 +52,7 @@ const LoginForm = () => {
                 Addresse email <RequiredField />
               </FormLabel>
               <FormControl>
-                <Input {...field} />
+                <Input {...field} type="email" />
               </FormControl>
               <FormMessage />
             </FormItem>

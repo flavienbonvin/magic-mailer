@@ -2,7 +2,7 @@ import ExperienceForm from "@/components/features/experience/experience-form";
 import { getTodayShow } from "@/data/actions/show";
 import { notFound } from "next/navigation";
 
-export const revalidate = 60;
+export const revalidate = 0;
 
 export default async function Page() {
   const todayShow = await getTodayShow();
