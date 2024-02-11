@@ -37,6 +37,12 @@ const ShowCard = async ({ show }: ShowCardProps) => {
             <DeleteShowModal show={show} showAttendees={showAttendees} />
           </div>
         )}
+        {show.status === ShowStatus.finished && (
+          <CardDescription className="flex items-center gap-2">
+            {showAttendees} {showAttendees === 1 ? "attendee" : "attendees"}
+            <DeleteShowModal show={show} showAttendees={showAttendees} />
+          </CardDescription>
+        )}
       </CardFooter>
     </Card>
   );

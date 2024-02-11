@@ -13,14 +13,17 @@ export const getAllShows = async () => {
 
 export const getAllIncomingOrInProgressShow = async () => {
   return db.query.shows.findMany({
-    where: or(eq(shows.status, ShowStatus.incoming), eq(shows.status, ShowStatus.emailSent)),
+    where: and(
+      eq(shows.visible, true),
+      or(eq(shows.status, ShowStatus.incoming), eq(shows.status, ShowStatus.emailSent)),
+    ),
     orderBy: shows.date,
   });
 };
 
 export const getAllFinishedShow = async () => {
   return db.query.shows.findMany({
-    where: eq(shows.status, ShowStatus.finished),
+    where: and(eq(shows.visible, true), eq(shows.status, ShowStatus.finished)),
     orderBy: shows.date,
   });
 };
@@ -34,10 +37,17 @@ export const getShowById = async (id: number) => {
 export const getTodayShow = async () => {
   return await db.query.shows.findFirst({
     where: and(
+      eq(shows.visible, true),
       gte(shows.date, startOfToday()),
       lte(shows.date, endOfToday()),
       or(eq(shows.status, ShowStatus.incoming), eq(shows.status, ShowStatus.emailSent)),
     ),
+  });
+};
+
+export const getManagementShow = async () => {
+  return await db.query.shows.findFirst({
+    where: and(eq(shows.visible, false), eq(shows.name, "Management Show")),
   });
 };
 
