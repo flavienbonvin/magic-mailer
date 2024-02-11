@@ -1,5 +1,6 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -9,7 +10,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
 import { PAGES } from "@/constants";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -24,13 +24,13 @@ const ConfirmationStepEmail = ({ showID }: ConfirmationStepEmailProps) => {
   const [loading, setLoading] = useState(false);
 
   const handleContinue = async () => {
-    setLoading(true)
+    setLoading(true);
     await fetch(PAGES.API_SEND_EMAIL, {
       method: "POST",
       body: JSON.stringify({ showID }),
     });
     router.push(PAGES.STEP2(showID));
-    setOpen(false)
+    setOpen(false);
   };
 
   return (
@@ -46,11 +46,15 @@ const ConfirmationStepEmail = ({ showID }: ConfirmationStepEmailProps) => {
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
-          <Button variant='outline'>Annuler</Button>
-          <Button onClick={handleContinue} disabled={loading}>{loading ? "Envoi en cours" : "Continuer"}</Button>
+          <Button variant="outline" onClick={() => setOpen(false)}>
+            Annuler
+          </Button>
+          <Button onClick={handleContinue} disabled={loading}>
+            {loading ? "Envoi en cours" : "Continuer"}
+          </Button>
         </DialogFooter>
       </DialogContent>
-    </Dialog >
+    </Dialog>
   );
 };
 

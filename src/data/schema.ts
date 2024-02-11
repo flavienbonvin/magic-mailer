@@ -22,6 +22,7 @@ export const shows = pgTable("show", {
   image2Name: uuid("image2_name").notNull(),
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
+  visible: boolean("visible").default(true),
 });
 
 export type Show = typeof shows.$inferSelect;

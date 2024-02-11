@@ -84,13 +84,13 @@ const ExperienceForm = ({ showID }: ExperienceFormProps) => {
                       Votre email <RequiredField />
                     </FormLabel>
                     <FormControl>
-                      <Input {...field} className="bg-white text-black" />
+                      <Input {...field} type="email" className="bg-white text-black" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-              <Button type="submit" className="bg-blueExperience w-full gap-2 text-white">
+              <Button type="submit" className="w-full gap-2 bg-blueExperience text-white">
                 <Sparkles size={16} />
                 Sauvegarder
               </Button>

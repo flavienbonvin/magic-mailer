@@ -9,6 +9,7 @@ import { getImageURL } from "@/lib/image";
 import { FileImage, Trash } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import UploadImageStatus from "./upload-image-status";
 
 interface UploadPicutreProps {
   show: Show;
@@ -68,6 +69,7 @@ const UploadPicture = ({ show, pictureName, imageID }: UploadPicutreProps) => {
 
   return (
     <>
+      <UploadImageStatus preview={!!preview} uploading={uploading} />
       {preview ? (
         <div className="flex flex-col items-center gap-3">
           <div className="relative mx-auto h-[500px] w-full sm:w-96">

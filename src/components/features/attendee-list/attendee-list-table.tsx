@@ -41,6 +41,7 @@ const AttendeeSourceCell = ({ source }: { source: AttendeeSource }) => {
 };
 
 const AttendeeListTable = ({ attendees, allAttendees }: AttendeeTableProps) => {
+  const isSourceExperience = attendees[0].source === AttendeeSource.experience;
   return (
     <Table className="w-full border">
       <TableCaption>{attendees.length} personnes présentes à la représentation</TableCaption>
@@ -48,7 +49,7 @@ const AttendeeListTable = ({ attendees, allAttendees }: AttendeeTableProps) => {
       <TableHeader>
         <TableRow>
           <TableHead className="w-3/12">Prénom</TableHead>
-          <TableHead className="w-3/12">Nom de famille</TableHead>
+          {!isSourceExperience && <TableHead className="w-3/12">Nom de famille</TableHead>}
           <TableHead className="w-4/12">Email</TableHead>
           {allAttendees && <TableHead className="w-4/12">Source</TableHead>}
         </TableRow>
@@ -56,9 +57,11 @@ const AttendeeListTable = ({ attendees, allAttendees }: AttendeeTableProps) => {
       <TableBody>
         {attendees.map((attendee: Attendee) => (
           <TableRow key={attendee.id}>
-            <TableCell className="max-w-0 truncate">{attendee.firstName}</TableCell>
-            <TableCell className="max-w-0 truncate">{attendee.lastName}</TableCell>
-            <TableCell>{attendee.email}</TableCell>
+            <TableCell className="max-w-0 truncate">{attendee.firstName || "-"}</TableCell>
+            {!isSourceExperience && (
+              <TableCell className="max-w-0 truncate">{attendee.lastName || "-"}</TableCell>
+            )}
+            <TableCell>{attendee.email || "-"}</TableCell>
             {allAttendees && <AttendeeSourceCell source={attendee.source} />}
           </TableRow>
         ))}

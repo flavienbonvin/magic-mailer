@@ -11,9 +11,10 @@ const seedDatabase = async () => {
   const show = await db
     .insert(shows)
     .values({
-      name: "The Mandalorian",
+      name: "Management Show",
       date: new Date(),
       status: ShowStatus.incoming,
+      visible: false,
       image1Name: crypto.randomUUID(),
       image2Name: crypto.randomUUID(),
     })

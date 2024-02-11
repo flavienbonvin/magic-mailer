@@ -3,6 +3,7 @@
 import RequiredField from "@/components/atoms/required-field";
 import { Button } from "@/components/ui/button";
 import DatePicker from "@/components/ui/date-picker";
+import { DialogFooter } from "@/components/ui/dialog";
 import {
   Form,
   FormControl,
@@ -93,7 +94,12 @@ const CreateEditShowForm = ({ show, setOpen }: CreateShowFormProps) => {
             </FormItem>
           )}
         />
-        <Button type="submit">Sauvegarder</Button>
+        <DialogFooter>
+          <Button variant="outline" type="button" onClick={() => setOpen(false)}>
+            Annuler
+          </Button>
+          <Button type="submit">Sauvegarder</Button>
+        </DialogFooter>
       </form>
     </Form>
   );

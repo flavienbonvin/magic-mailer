@@ -67,6 +67,13 @@ export const getAttendeesForShow = (showId: number) => {
   });
 };
 
+export const moveAllAttendeesToAnotherShow = async (fromShowId: number, toShowId: number) => {
+  await db
+    .update(attendees)
+    .set({ linkedShow: toShowId })
+    .where(eq(attendees.linkedShow, fromShowId));
+};
+
 export const getAttendeesCountForShow = async (showId: number) => {
   const attendees = await getAttendeesForShow(showId);
   return attendees.length;
