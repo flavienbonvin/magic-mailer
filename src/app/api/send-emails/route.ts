@@ -7,6 +7,8 @@ import MagicMail from "@/emails/emails/magic-mail";
 import { getImageURL } from "@/lib/image";
 import { EmailParams, MailerSend, Recipient, Sender } from "mailersend";
 
+export const maxDuration = 600;
+
 const mailerSend = new MailerSend({
   apiKey: process.env.MAILER_SEND_API_KEY || "",
 });
