@@ -11,23 +11,38 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { PAGES } from "@/constants";
+import { Attendee } from "@/data/schema";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 interface ConfirmationStepEmailProps {
   showID: number;
+  attendees: Attendee[];
+  image1Name?: string;
+  image2Name?: string;
 }
 
-const ConfirmationStepEmail = ({ showID }: ConfirmationStepEmailProps) => {
+const ConfirmationStepEmail = ({
+  showID,
+  attendees,
+  image1Name,
+  image2Name,
+}: ConfirmationStepEmailProps) => {
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const handleContinue = async () => {
+    const formattedAttendees = attendees?.map((attendee) => ({
+      email: attendee.email,
+      name: attendee.lastName,
+      firstName: attendee.firstName,
+    }));
+
     setLoading(true);
     await fetch(PAGES.API_SEND_EMAIL, {
       method: "POST",
-      body: JSON.stringify({ showID }),
+      body: JSON.stringify({ showID, attendees: formattedAttendees, image1Name, image2Name }),
     });
     router.push(PAGES.STEP2(showID));
     setOpen(false);

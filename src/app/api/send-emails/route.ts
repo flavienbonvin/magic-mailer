@@ -1,8 +1,7 @@
-import { getShowById, updateShowStatus } from "@/data/actions/show";
-import { ShowStatus } from "@/data/schema";
+import { updateShowStatus } from "@/data/actions/show";
+import { Attendee, ShowStatus } from "@/data/schema";
 import { render } from "@react-email/render";
 
-import { getAttendeesForShow } from "@/data/actions/attendees";
 import MagicMail from "@/emails/emails/magic-mail";
 import { getImageURL } from "@/lib/image";
 import { EmailParams, MailerSend, Recipient, Sender } from "mailersend";
@@ -14,36 +13,40 @@ const mailerSend = new MailerSend({
 });
 
 export async function POST(request: Request) {
-  const { showID } = await request.json();
-  if (!showID) {
+  console.time("send-emails");
+  const { showID, attendees, image1Name, image2Name } = await request.json();
+  if (!showID || !attendees || !image1Name || !image2Name) {
     return Response.json({ error: "Show not found" }, { status: 404 });
   }
 
-  const show = await getShowById(showID);
-  const attendees = await getAttendeesForShow(showID);
-
   const sentFrom = new Sender("info@redcurtain.ch", "Marco Smacchia");
-  const emailParams = attendees.map((attendee) => {
+  console.time("emailParams");
+  const emailHtml = render(
+    MagicMail({
+      image1: getImageURL(image1Name),
+      image2: getImageURL(image2Name),
+    }),
+  );
+
+  const emailParams = attendees.map((attendee: Attendee) => {
     const attendeeName = attendee.firstName ?? undefined;
     const recipient = new Recipient(attendee.email, attendeeName);
-
-    const emailHtml = render(
-      MagicMail({
-        attendeeName,
-        image1: getImageURL(show?.image1Name),
-        image2: getImageURL(show?.image2Name),
-      }),
-    );
-
     return new EmailParams()
       .setFrom(sentFrom)
       .setTo([recipient])
       .setSubject("⚠️ A ouvrir à la fin du spectacle ⚠️ - Expérience")
       .setHtml(emailHtml);
   });
+  console.timeEnd("emailParams");
 
+  console.time("sendBulk");
   mailerSend.email.sendBulk(emailParams);
-  await updateShowStatus(showID, ShowStatus.emailSent);
+  console.timeEnd("sendBulk");
 
+  console.time("updateShowStatus");
+  await updateShowStatus(showID, ShowStatus.emailSent);
+  console.timeEnd("updateShowStatus");
+
+  console.timeEnd("send-emails");
   return Response.json({});
 }

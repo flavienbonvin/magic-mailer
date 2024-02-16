@@ -1,15 +1,13 @@
-import { getAttendeesForShow } from "@/data/actions/attendees";
 import { Attendee } from "@/data/schema";
 import AttendeeTable from "./addendees-table";
 import AttendeeUpload from "./attendee-upload";
 
 interface AttendeeManagementProps {
   showID: number;
+  attendees: Attendee[];
 }
 
-const AttendeeManagement = async ({ showID }: AttendeeManagementProps) => {
-  const attendees = (await getAttendeesForShow(+showID)) as Attendee[];
-
+const AttendeeManagement = async ({ showID, attendees }: AttendeeManagementProps) => {
   return (
     <>
       <AttendeeUpload showID={showID} disableDeleAll={!attendees.length} />
