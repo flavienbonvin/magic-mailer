@@ -15,12 +15,11 @@ import {
 import { getSocialImageURL } from "../../lib/image";
 
 interface MagicMailProps {
-  attendeeName?: string;
   image1?: string;
   image2?: string;
 }
 
-export const MagicMail = ({ attendeeName, image1, image2 }: MagicMailProps) => {
+export const MagicMail = ({ image1, image2 }: MagicMailProps) => {
   const previewText = "L'expérience se prolonge!";
 
   const socialImages = getSocialImageURL();
@@ -33,9 +32,7 @@ export const MagicMail = ({ attendeeName, image1, image2 }: MagicMailProps) => {
         <Body className="mx-auto my-auto bg-white font-sans">
           <Container className="mx-auto my-10 w-[465px] rounded border border-solid border-gray-200 p-5">
             <Section>
-              <Text className="text-sm leading-6 text-black">
-                {attendeeName ? `Cher ${attendeeName},` : "Cher spectateur,"}
-              </Text>
+              <Text className="text-sm leading-6 text-black">Cher spectateur,</Text>
               <Text className="text-sm leading-6 text-black">
                 Vous avez été un public incroyable, pour vous remercier je tenais à ce que vous
                 emportiez un souvenir magique.
@@ -61,7 +58,8 @@ export const MagicMail = ({ attendeeName, image1, image2 }: MagicMailProps) => {
             {/* Image 2 */}
             <Section className="mt-4">
               <Text className="text-sm leading-6 text-black">
-                Et pour finir, zoomer dans les yeux de la célébrité, un regard ne ment jamais :
+                Et pour finir, zoomer dans les yeux de la célébrité, un regard ne ment jamais. Vous
+                y trouverez la carte choisie au hasard sur scène par le spectateur :
               </Text>
               <Img width="600" height="600" className="object-contain" src={image2} />
             </Section>
