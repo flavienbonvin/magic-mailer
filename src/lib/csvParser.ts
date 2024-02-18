@@ -8,8 +8,12 @@ export const parseFileToAttendees = (file: File, callback: (data: CSVAttendee[])
     complete: (results) => {
       const attendees = new Set<string>();
 
-      results.data.forEach((item) => {
-        const attendee = CSVAttendeeParser.parse({ ...(item ?? {}) });
+      results.data.forEach((item: any) => {
+        if (!item["EMAIL CLIENT"]) {
+          return;
+        }
+
+        const attendee = CSVAttendeeParser.safeParse({ ...(item ?? {}) });
         attendees.add(JSON.stringify(attendee));
       });
 
