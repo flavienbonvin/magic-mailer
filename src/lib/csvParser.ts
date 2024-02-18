@@ -1,5 +1,6 @@
 import { CSVAttendee, CSVAttendeeParser } from "@/data/models/csvAttendee";
 import Papa from "papaparse";
+import { toast } from "sonner";
 
 export const parseFileToAttendees = (file: File, callback: (data: CSVAttendee[]) => void) => {
   Papa.parse(file, {
@@ -13,8 +14,12 @@ export const parseFileToAttendees = (file: File, callback: (data: CSVAttendee[])
           return;
         }
 
-        const attendee = CSVAttendeeParser.safeParse({ ...(item ?? {}) });
-        attendees.add(JSON.stringify(attendee));
+        try {
+          const attendee = CSVAttendeeParser.parse({ ...(item ?? {}) });
+          attendees.add(JSON.stringify(attendee));
+        } catch (e) {
+          toast.error(`Error parsing CSV file, ${JSON.stringify(item)}`, { duration: 100000 });
+        }
       });
 
       const finalAttendees = Array.from(attendees).map((item) => {
